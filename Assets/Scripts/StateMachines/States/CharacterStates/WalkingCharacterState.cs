@@ -21,7 +21,7 @@ public class WalkingCharacterState : State
 
     public override void OnExitState()
     {
-        Debug.Log("Sto uscendo da Walking");
+
     }
 
     public override void OnFixedUpdate()
@@ -31,6 +31,7 @@ public class WalkingCharacterState : State
 
     public override void OnEnterState()
     {
+        if(_owner.debug)
         Debug.Log("Sto entrando in Walking");
     }
 
@@ -46,6 +47,10 @@ public class WalkingCharacterState : State
 
     public override void OnUpdate()
     {
-        Debug.Log("Sono nell'update di Walking");
+        //controllo se non premo più nulla.
+        if (!_owner.IsWalking)
+        {
+            _owner.SetState(ECharacterState.Walking);
+        }
     }
 }

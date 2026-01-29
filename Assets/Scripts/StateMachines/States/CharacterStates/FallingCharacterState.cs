@@ -21,7 +21,7 @@ public class FallingCharacterState : State
 
     public override void OnExitState()
     {
-        Debug.Log("Sto uscendo da Falling");
+
     }
 
     public override void OnFixedUpdate()
@@ -31,7 +31,8 @@ public class FallingCharacterState : State
 
     public override void OnEnterState()
     {
-        Debug.Log("Sto entrando in Falling");
+        if (_owner.debug)
+            Debug.Log("Sto entrando in Falling");
     }
 
     public override void OnTriggerEnter()
@@ -46,6 +47,18 @@ public class FallingCharacterState : State
 
     public override void OnUpdate()
     {
-        Debug.Log("Sono nell'update di Falling");
+        //controllo se ha toccato terra
+        //if(_owner.GetComponent<Rigidbody2D>().velocity.y == 0)
+        //{
+        //    //cambio stato in idle o walking
+        //    if(_owner.isWalking)
+        //    {
+        //        _owner.SetState(ECharacterState.Walking);
+        //    }
+        //    else
+        //    {
+        //        _owner.SetState(ECharacterState.Idle);
+        //    }
+        //}
     }
 }

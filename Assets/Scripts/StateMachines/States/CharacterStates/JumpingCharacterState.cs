@@ -21,7 +21,7 @@ public class JumpingCharacterState : State
 
     public override void OnExitState()
     {
-        Debug.Log("Sto uscendo da Jumping");
+
     }
 
     public override void OnFixedUpdate()
@@ -31,6 +31,7 @@ public class JumpingCharacterState : State
 
     public override void OnEnterState()
     {
+        if(_owner.debug)
         Debug.Log("Sto entrando in Jumping");
     }
 
@@ -46,6 +47,11 @@ public class JumpingCharacterState : State
 
     public override void OnUpdate()
     {
-        Debug.Log("Sono nell'update di Jumping");
+        //controllo se sta salendo o scendendo
+        //if(_owner.GetComponent<Rigidbody2D>().velocity.y < 0)
+        //{
+        //    //cambio stato in falling
+        //    //_owner.SetState(ECharacterState.Falling);
+        //}
     }
 }

@@ -21,7 +21,7 @@ public class IdleCharacterState : State
 
     public override void OnExitState()
     {
-        Debug.Log("Sto uscendo da Idle");
+        
     }
 
     public override void OnFixedUpdate()
@@ -31,6 +31,7 @@ public class IdleCharacterState : State
 
     public override void OnEnterState()
     {
+        if(_owner.debug)
         Debug.Log("Sto entrando in Idle");
     }
 
@@ -46,11 +47,10 @@ public class IdleCharacterState : State
 
     public override void OnUpdate()
     {
-        Debug.Log("Sono nell'update di Idle");
-
-        if (_owner.InputPressed == 'W')
+        //controllo se premo un tasto di movimento
+        if (_owner.IsWalking)
         {
-            _owner.SetState(ECharacterState.Jumping);
+            _owner.SetState(ECharacterState.Walking);
         }
     }
 }
