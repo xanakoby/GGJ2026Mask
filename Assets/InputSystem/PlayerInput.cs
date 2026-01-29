@@ -16,6 +16,8 @@ public class PlayerInput : Singleton<PlayerInput>, PlayerControls.IPlayerInputAc
     public Action OnInteractionAction;
     public Action OnHoldSwitchMask;
     public Action OnUnHoldSwitchMask;
+    public Action OnSwitchLMask;
+    public Action OnSwitchRMask;
 
     public PlayerControls controllers;
 
@@ -100,6 +102,22 @@ public class PlayerInput : Singleton<PlayerInput>, PlayerControls.IPlayerInputAc
         if (context.phase == InputActionPhase.Performed)
         {
             OnPauseAction?.Invoke();
+        }
+    }
+
+    public void OnLMask(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnSwitchLMask?.Invoke();
+        }
+    }
+
+    public void OnRMask(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnSwitchRMask?.Invoke();
         }
     }
 }

@@ -136,6 +136,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LMask"",
+                    ""type"": ""Button"",
+                    ""id"": ""db566709-9c08-42d2-a508-55480d4ca48b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RMask"",
+                    ""type"": ""Button"",
+                    ""id"": ""72a06f94-73aa-4bd5-b65b-74ed0eed11a3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -237,6 +255,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""383a6b92-307a-4f26-8a3a-416aa7020d65"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LMask"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f43f7bb9-59fa-4ff7-aba2-811f08de5e8c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RMask"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +290,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInput_Interact = m_PlayerInput.FindAction("Interact", throwIfNotFound: true);
         m_PlayerInput_ChangeMask = m_PlayerInput.FindAction("ChangeMask", throwIfNotFound: true);
         m_PlayerInput_Pause = m_PlayerInput.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerInput_LMask = m_PlayerInput.FindAction("LMask", throwIfNotFound: true);
+        m_PlayerInput_RMask = m_PlayerInput.FindAction("RMask", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -335,6 +377,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInput_Interact;
     private readonly InputAction m_PlayerInput_ChangeMask;
     private readonly InputAction m_PlayerInput_Pause;
+    private readonly InputAction m_PlayerInput_LMask;
+    private readonly InputAction m_PlayerInput_RMask;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerInput".
     /// </summary>
@@ -366,6 +410,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerInput/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_PlayerInput_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerInput/LMask".
+        /// </summary>
+        public InputAction @LMask => m_Wrapper.m_PlayerInput_LMask;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerInput/RMask".
+        /// </summary>
+        public InputAction @RMask => m_Wrapper.m_PlayerInput_RMask;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -407,6 +459,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @LMask.started += instance.OnLMask;
+            @LMask.performed += instance.OnLMask;
+            @LMask.canceled += instance.OnLMask;
+            @RMask.started += instance.OnRMask;
+            @RMask.performed += instance.OnRMask;
+            @RMask.canceled += instance.OnRMask;
         }
 
         /// <summary>
@@ -433,6 +491,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @LMask.started -= instance.OnLMask;
+            @LMask.performed -= instance.OnLMask;
+            @LMask.canceled -= instance.OnLMask;
+            @RMask.started -= instance.OnRMask;
+            @RMask.performed -= instance.OnRMask;
+            @RMask.canceled -= instance.OnRMask;
         }
 
         /// <summary>
@@ -508,5 +572,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LMask" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLMask(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RMask" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRMask(InputAction.CallbackContext context);
     }
 }

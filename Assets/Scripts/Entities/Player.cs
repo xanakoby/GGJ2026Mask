@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [Header("Refs")]
     public PlayerMovementData[] MaskMovement;
-    public PlayerMovementData currentMaskMovement;
+    public int currentMaskIndex = 0;
+    public PlayerMovementData maskNoneMovement;
     public Rigidbody rb;
 
     [Header("Vars")]
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour
     public bool IsWalking;
     public bool IsGrounded;
     public bool IsFalling;
-    public bool IsSelectingMask;
+    //public bool IsSelectingMask;
 
     public bool debug;
     private void Awake()
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //debugging?
-        SetMaskMovementData(currentMaskMovement);
+        SetMaskMovementData(MaskMovement[0]);
     }
 
     public void SetState(ECharacterState newState)
@@ -112,16 +113,16 @@ public class Player : MonoBehaviour
 
         playerInput.OnPlayerJumpAction += () =>
         {
-            if (IsSelectingMask)
-                return;
+            //if (IsSelectingMask)
+            //    return;
 
             if (CanJump())
                 Jump();
         };
         playerInput.OnPlayerStopHoldJumpAction += () =>
         {
-            if (IsSelectingMask)
-                return;
+            //if (IsSelectingMask)
+            //    return;
 
             if (CanJumpCut())
                 JumpCut();
@@ -129,6 +130,8 @@ public class Player : MonoBehaviour
 
         //playerInput.OnHoldSwitchMask += SwitchMaskHold;
         //playerInput.OnUnHoldSwitchMask += SwitchMaskUnHold;
+        playerInput.OnSwitchLMask += SwitchLeftMask;
+        playerInput.OnSwitchRMask += SwitchRightMask;
     }
     private void OnDisable()
     {
@@ -148,16 +151,16 @@ public class Player : MonoBehaviour
 
         playerInput.OnPlayerJumpAction -= () =>
         {
-            if (IsSelectingMask)
-                return;
+            //if (IsSelectingMask)
+            //    return;
 
             if (CanJump())
                 Jump();
         };
         playerInput.OnPlayerStopHoldJumpAction -= () =>
         {
-            if (IsSelectingMask)
-                return;
+            //if (IsSelectingMask)
+            //    return;
 
             if (CanJumpCut())
                 JumpCut();
@@ -165,6 +168,8 @@ public class Player : MonoBehaviour
 
         //playerInput.OnHoldSwitchMask -= SwitchMaskHold;
         //playerInput.OnUnHoldSwitchMask -= SwitchMaskUnHold;
+        playerInput.OnSwitchLMask -= SwitchLeftMask;
+        playerInput.OnSwitchRMask -= SwitchRightMask;
     }
     #region CHECK METHODS
     public void CheckDirectionToFace(bool isMovingRight)
@@ -223,21 +228,41 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
     }
     #endregion
-    private void SwitchMaskHold()
-    {
-        //fermo il tempo e per ora apro il menu delle maschere
-        Time.timeScale = 0f;
-        UIManager.Instance.ShowMaskSelectionMenu();
+    //private void SwitchMaskHold()
+    //{
+    //    //fermo il tempo e per ora apro il menu delle maschere
+    //    Time.timeScale = 0f;
+    //    UIManager.Instance.ShowMaskSelectionMenu();
 
-        IsSelectingMask = true;
+    //    IsSelectingMask = true;
+    //}
+    //private void SwitchMaskUnHold()
+    //{
+    //    //il tempo riprende e chiudo il menu delle maschere
+    //    Time.timeScale = 1f;
+    //    UIManager.Instance.HideMaskSelectionMenu();
+
+    //    IsSelectingMask = false;
+    //}
+    private void SwitchLeftMask()
+    {
+        currentMaskIndex--;
+        if(currentMaskIndex < 0)
+        {
+            currentMaskIndex = MaskMovement.Length - 1;
+        }
+        SetMaskMovementData(MaskMovement[currentMaskIndex]);
+        UIManager.Instance.SwitchToLeftMask();
     }
-    private void SwitchMaskUnHold()
+    private void SwitchRightMask()
     {
-        //il tempo riprende e chiudo il menu delle maschere
-        Time.timeScale = 1f;
-        UIManager.Instance.HideMaskSelectionMenu();
-
-        IsSelectingMask = false;
+        currentMaskIndex++;
+        if (currentMaskIndex >= MaskMovement.Length)
+        {
+            currentMaskIndex = 0;
+        }
+        SetMaskMovementData(MaskMovement[currentMaskIndex]);
+        UIManager.Instance.SwitchToRightMask();
     }
 
     private void OnDrawGizmos()
