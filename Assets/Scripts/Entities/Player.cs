@@ -98,9 +98,6 @@ public class Player : MonoBehaviour
         //assegno l'input del player
         playerInput.OnPlayerMoveAction += () =>
         {
-            if (IsSelectingMask)
-                return;
-
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
 
@@ -108,9 +105,6 @@ public class Player : MonoBehaviour
         };
         playerInput.OnPlayerStandAction += () =>
         {
-            if (IsSelectingMask)
-                return;
-
             _moveInput.x = 0;
             _moveInput.y = 0;
             IsMoving = false;
@@ -133,26 +127,20 @@ public class Player : MonoBehaviour
                 JumpCut();
         };
 
-        playerInput.OnHoldSwitchMask += SwitchMaskHold;
-        playerInput.OnUnHoldSwitchMask += SwitchMaskUnHold;
+        //playerInput.OnHoldSwitchMask += SwitchMaskHold;
+        //playerInput.OnUnHoldSwitchMask += SwitchMaskUnHold;
     }
     private void OnDisable()
     {
         //disassegno l'input del player
         playerInput.OnPlayerMoveAction -= () =>
         {
-            if (IsSelectingMask)
-                return;
-
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
             IsMoving = true;
         };
         playerInput.OnPlayerStandAction -= () =>
         {
-            if (IsSelectingMask)
-                return;
-
             _moveInput.x = 0;
             _moveInput.y = 0;
             IsMoving = false;
@@ -175,8 +163,8 @@ public class Player : MonoBehaviour
                 JumpCut();
         };
 
-        playerInput.OnHoldSwitchMask -= SwitchMaskHold;
-        playerInput.OnUnHoldSwitchMask -= SwitchMaskUnHold;
+        //playerInput.OnHoldSwitchMask -= SwitchMaskHold;
+        //playerInput.OnUnHoldSwitchMask -= SwitchMaskUnHold;
     }
     #region CHECK METHODS
     public void CheckDirectionToFace(bool isMovingRight)
