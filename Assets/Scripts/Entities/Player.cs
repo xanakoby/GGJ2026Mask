@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public bool IsWalking;
     public bool IsGrounded;
     public bool IsFalling;
+    public bool IsSelectingMask;
 
     public bool debug;
     private void Awake()
@@ -97,6 +98,9 @@ public class Player : MonoBehaviour
         //assegno l'input del player
         playerInput.OnPlayerMoveAction += () =>
         {
+            if (IsSelectingMask)
+                return;
+
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
 
@@ -104,6 +108,9 @@ public class Player : MonoBehaviour
         };
         playerInput.OnPlayerStandAction += () =>
         {
+            if (IsSelectingMask)
+                return;
+
             _moveInput.x = 0;
             _moveInput.y = 0;
             IsMoving = false;
@@ -111,13 +118,19 @@ public class Player : MonoBehaviour
 
         playerInput.OnPlayerJumpAction += () =>
         {
-            //OnJumpInput();
-            Jump();
+            if (IsSelectingMask)
+                return;
+
+            if (CanJump())
+                Jump();
         };
         playerInput.OnPlayerStopHoldJumpAction += () =>
         {
-            //OnJumpUpInput();
-            JumpCut();
+            if (IsSelectingMask)
+                return;
+
+            if (CanJumpCut())
+                JumpCut();
         };
 
         playerInput.OnHoldSwitchMask += SwitchMaskHold;
@@ -128,12 +141,18 @@ public class Player : MonoBehaviour
         //disassegno l'input del player
         playerInput.OnPlayerMoveAction -= () =>
         {
+            if (IsSelectingMask)
+                return;
+
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
             IsMoving = true;
         };
         playerInput.OnPlayerStandAction -= () =>
         {
+            if (IsSelectingMask)
+                return;
+
             _moveInput.x = 0;
             _moveInput.y = 0;
             IsMoving = false;
@@ -141,13 +160,17 @@ public class Player : MonoBehaviour
 
         playerInput.OnPlayerJumpAction -= () =>
         {
-            //OnJumpInput();
-            if(CanJump())
+            if (IsSelectingMask)
+                return;
+
+            if (CanJump())
                 Jump();
         };
         playerInput.OnPlayerStopHoldJumpAction -= () =>
         {
-            //OnJumpUpInput();
+            if (IsSelectingMask)
+                return;
+
             if (CanJumpCut())
                 JumpCut();
         };
@@ -216,11 +239,17 @@ public class Player : MonoBehaviour
     {
         //fermo il tempo e per ora apro il menu delle maschere
         Time.timeScale = 0f;
+        UIManager.Instance.ShowMaskSelectionMenu();
+
+        IsSelectingMask = true;
     }
     private void SwitchMaskUnHold()
     {
         //il tempo riprende e chiudo il menu delle maschere
         Time.timeScale = 1f;
+        UIManager.Instance.HideMaskSelectionMenu();
+
+        IsSelectingMask = false;
     }
 
     private void OnDrawGizmos()

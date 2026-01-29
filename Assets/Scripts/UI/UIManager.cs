@@ -1,16 +1,22 @@
+using DesignPatterns.Generics;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public CanvasGroup maskSelectionObj;
+    public Image boardMaskSelection;
 
-    // Update is called once per frame
-    void Update()
+    public override void Awake()
     {
-        
+        base.Awake();
+    }
+    public void ShowMaskSelectionMenu()
+    {
+        maskSelectionObj.gameObject.SetActive(true);
+    }
+    public void HideMaskSelectionMenu()
+    {
+        maskSelectionObj.gameObject.SetActive(false);
     }
 }

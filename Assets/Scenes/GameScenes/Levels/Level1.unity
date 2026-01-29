@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 896570381}
   - component: {fileID: 896570380}
   - component: {fileID: 896570379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,9 +900,9 @@ MonoBehaviour:
   currentMask: 0
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   _groundCheckPoint: {fileID: 1758112246}
-  _groundCheckSize: {x: 1, y: 1, z: 1}
+  _groundCheckSize: {x: 1, y: 0.2, z: 1}
   IsFacingRight: 0
   IsMoving: 0
   IsWalking: 0
