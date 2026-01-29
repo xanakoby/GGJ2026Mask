@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     [Header("Checks")]
     [SerializeField] private Transform _groundCheckPoint;
-    [SerializeField] private Vector2 _groundCheckSize = new Vector2(0.49f, 0.03f);
+    [SerializeField] private Vector3 _groundCheckSize = new Vector3(1f, 0.5f, 1f);
     public bool IsFacingRight;
     public bool IsJumping { get; private set; }
     public bool IsMoving;
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         if (!IsJumping)
         {
             //Ground Check
-            if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer)) //checks if set box overlaps with ground
+            if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize, transform.rotation, _groundLayer))
             {
                 IsGrounded = true;
             }
@@ -221,5 +221,11 @@ public class Player : MonoBehaviour
     {
         //il tempo riprende e chiudo il menu delle maschere
         Time.timeScale = 1f;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(_groundCheckPoint.position, _groundCheckSize);
     }
 }

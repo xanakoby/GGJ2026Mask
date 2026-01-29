@@ -869,7 +869,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1758112246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1231344911
@@ -897,9 +898,16 @@ MonoBehaviour:
   gravitiAdded: 0
   jumpForce: 0
   currentMask: 0
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheckPoint: {fileID: 1758112246}
+  _groundCheckSize: {x: 1, y: 1, z: 1}
   IsFacingRight: 0
   IsMoving: 0
-  isWalking: 0
+  IsWalking: 0
+  IsGrounded: 0
+  IsFalling: 0
   debug: 0
 --- !u!114 &1231344912
 MonoBehaviour:
@@ -953,6 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interacter
   playerInput: {fileID: 1231344912}
+  interactable: {fileID: 0}
   watchingObject: {fileID: 0}
   watchingTriggerObject: {fileID: 0}
 --- !u!1 &1476885570
@@ -1094,6 +1103,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1072071459138487254, guid: ae1ee7b626f2bf445835fb9f99f054ec, type: 3}
   m_PrefabInstance: {fileID: 6278823484105429181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1758112245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758112246}
+  m_Layer: 0
+  m_Name: GroundCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758112246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758112245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1231344910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942270186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,8 +1421,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3651693865888755930, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4533929500002801928, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815095141364990534, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6170935641154986063, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
