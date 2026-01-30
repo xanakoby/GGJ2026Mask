@@ -2009,6 +2009,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7262326105312783893, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262326105312783893, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262326105312783893, guid: c030352cf409c98408ab5a6ea6fc103c, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6591,11 +6603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1484352291765145556, guid: 4e68d5addab20d94496f5ba3ff0fe636, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.05999756
+      value: 0.060058594
       objectReference: {fileID: 0}
     - target: {fileID: 1484352291765145556, guid: 4e68d5addab20d94496f5ba3ff0fe636, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.049987793
+      value: 0.050048828
       objectReference: {fileID: 0}
     - target: {fileID: 2422360561892364419, guid: 4e68d5addab20d94496f5ba3ff0fe636, type: 3}
       propertyPath: m_AnchorMax.y
