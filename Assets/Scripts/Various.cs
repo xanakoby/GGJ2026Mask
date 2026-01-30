@@ -10,4 +10,8 @@ public class Various : MonoBehaviour
     {
         GameManager.Instance.ChangeScene(_sceneName);
     }
+    public void PlaySound(string soundName)
+    {
+        AudioManager.instance.PlaySFX(soundName);
+    }
 }
