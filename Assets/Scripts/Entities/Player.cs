@@ -332,8 +332,8 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector3(lastDir.normalized.x * dashForce, 0, 0);
             yield return null;
         }
-        yield return new WaitForSeconds(dashCooldown - dashDuration);
         IsDashing = false;
+        yield return new WaitForSeconds(dashCooldown - dashDuration);
     }
     #endregion
     #region MASK METHODS
