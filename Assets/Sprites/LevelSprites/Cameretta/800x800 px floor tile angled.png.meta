@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4d86fa67bcfae3a4c87e8468b89aabe5
+guid: c855d2b6a783db24da5c416ebc291a28
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,73 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 800x800 px floor tile_0
+      name: 800x800 px floor tile angled_0
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1200
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6bbf94d37f7fc544af7e9a372c6109c
+      internalID: -70516452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 800x800 px floor tile angled_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83fd4c3ac47364941b1a22141213745e
+      internalID: -1532123888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 800x800 px floor tile angled_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 800
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6683a3b4f45581b42bc559a99be05d56
+      internalID: 327313514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 800x800 px floor tile angled_3
       rect:
         serializedVersion: 2
         x: 0
@@ -125,14 +191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73f59fe3601fbe245b20e4930e40cf73
-      internalID: -1644445748
+      spriteID: 015435b93c3e138438a530118d1a187f
+      internalID: -1181996356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 800x800 px floor tile_1
+      name: 800x800 px floor tile angled_4
       rect:
         serializedVersion: 2
         x: 400
@@ -147,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a24c79974de92042ad41c49f9c217ab
-      internalID: -579522523
+      spriteID: af43a196df16fb94d9544f99030f76a2
+      internalID: -1566021706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 800x800 px floor tile_2
+      name: 800x800 px floor tile angled_5
       rect:
         serializedVersion: 2
         x: 0
@@ -166,41 +232,11 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 200, y: 200}
-        - {x: -200, y: 200}
-        - {x: -200, y: -200}
-        - {x: 200, y: -200}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15f60b6c68ba05d409ab1063a5eb1b78
-      internalID: 1073195737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 800x800 px floor tile_3
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape:
-      - - {x: 200, y: 200}
-        - {x: -200, y: 200}
-        - {x: -200, y: -200}
-        - {x: 200, y: -200}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 82a0484af28067942aa117ca83714b61
-      internalID: 1440129469
+      spriteID: b41a00ed828ab6e4ca0e6913a7cb8544
+      internalID: 353778641
       vertices: []
       indices: 
       edges: []
@@ -209,7 +245,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: c654288189ec5f04bb61e056149b1dd6
     internalID: 0
     vertices: []
     indices: 
@@ -221,10 +257,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":400.0,"y":400.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      800x800 px floor tile_0: -1644445748
-      800x800 px floor tile_1: -579522523
-      800x800 px floor tile_2: 1073195737
-      800x800 px floor tile_3: 1440129469
+      800x800 px floor tile angled_0: -70516452
+      800x800 px floor tile angled_1: -1532123888
+      800x800 px floor tile angled_2: 327313514
+      800x800 px floor tile angled_3: -1181996356
+      800x800 px floor tile angled_4: -1566021706
+      800x800 px floor tile angled_5: 353778641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
