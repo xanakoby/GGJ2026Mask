@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float gravitiAdded;
     public float jumpForce;
+    public float jumpCooldown;
 
     [Header("Dash Vars")]
     public float dashForce;
@@ -57,7 +58,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _groundCheckPoint;
     [SerializeField] private Vector3 _groundCheckSize = new Vector3(1f, 0.5f, 1f);
     public bool IsFacingRight;
-    public bool IsJumping { get; private set; }
+    public bool IsJumping;
+    //public bool HasGoneUp = true;
     public bool IsMoving;
     public bool IsWalking;
     public bool IsGrounded;
@@ -122,21 +124,26 @@ public class Player : MonoBehaviour
         #endregion
         #region COLLISION CHECKS
         //se non sono in salto controllo se sono a terra
-        if (!IsJumping)
-        {
-            //Ground Check
-            if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize, transform.rotation, _groundLayer))
-            {
-                IsGrounded = true;
-            }
-        }
+        //if (!IsJumping)
+        //{
+        //    //Ground Check
+        //    if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize, transform.rotation, _groundLayer))
+        //    {
+        //        IsGrounded = true;
+        //    }
+        //}
         #endregion
         #region JUMP CHECKS
         //se sono in salto e la velocità y è negativa (sto scendendo) allora non sono più in salto
-        if (IsJumping && rb.linearVelocity.y < 0)
-        {
-            IsJumping = false;
-        }
+        //if (IsJumping && rb.linearVelocity.y <= 0 && HasGoneUp)
+        //{
+        //    IsJumping = false;
+        //}
+        //if (!HasGoneUp && rb.linearVelocity.y > 0)
+        //{
+        //    Debug.Log("check");
+        //    HasGoneUp = true;
+        //}
         #endregion
     }
     private void FixedUpdate()
@@ -257,6 +264,14 @@ public class Player : MonoBehaviour
         playerInput.OnSwitchRMask -= SwitchRightMask;
     }
     #region CHECK METHODS
+    private void OnCollisionEnter(Collision col)
+    {
+        if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize, transform.rotation, _groundLayer))
+        {
+            IsJumping = false;
+            IsGrounded = true;
+        }
+    }
     public void CheckDirectionToFace(bool isMovingRight)
     {
         if (isMovingRight != IsFacingRight)
@@ -304,6 +319,7 @@ public class Player : MonoBehaviour
 
         IsJumping = true;
         IsGrounded = false;
+        //HasGoneUp = false;
     }
     private void JumpCut()
     {
