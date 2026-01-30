@@ -188,7 +188,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9111249903011880362}
@@ -271,8 +271,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9, y: 0.95, z: 1}
+  m_Center: {x: 0, y: -0.035, z: 0}
 --- !u!54 &2076462855623690269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -354,20 +354,21 @@ MonoBehaviour:
   speed: 0
   gravitiAdded: 0
   jumpForce: 0
-  dashForce: 5
-  dashDuration: 1
-  dashCooldown: 1.5
+  dashForce: 13
+  dashDuration: 0.15
+  dashCooldown: 1
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
   _groundCheckPoint: {fileID: 8691807083401656905}
-  _groundCheckSize: {x: 0.8, y: 0.2, z: 0.8}
+  _groundCheckSize: {x: 0.3, y: 0.2, z: 0.3}
   IsFacingRight: 0
   IsMoving: 0
   IsWalking: 0
   IsGrounded: 0
   IsFalling: 0
   IsDashing: 0
+  DashCooldown: 0
   IsAttacking: 0
   SwitchMaskCoolDown: 0.2
   IsSwitchingMask: 1
