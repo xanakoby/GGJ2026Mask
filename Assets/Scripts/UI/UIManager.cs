@@ -10,6 +10,7 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private HorizontalLayoutGroup maskSelectionLayout;
     [SerializeField] private Image[] maskImages;
+    [SerializeField] float switchTime = 0.2f;
     //public CanvasGroup maskSelectionObj;
     //[SerializeField] private RectTransform boardMaskSelection;
     //[SerializeField] private RectTransform handle;
@@ -90,13 +91,15 @@ public class UIManager : Singleton<UIManager>
             return;
 
         maskSelectionLayout.padding.left = -120;
-        if (switchedLeftRight)
+        if (!switchedLeftRight)
         {
             //l'ultimo switch èra destra, quindi era 2.341 e diventa 1.234
-            maskImages[0].sprite = maskImages[3].sprite;
             maskImages[3].sprite = maskImages[2].sprite;
             maskImages[2].sprite = maskImages[1].sprite;
             maskImages[1].sprite = maskImages[0].sprite;
+            maskImages[0].sprite = maskImages[3].sprite;
+
+            
         }
         //la mask che sta a sinistra è quella che compare a destra
         StartCoroutine(LerpToInTime(0.2f, -120, 10));
@@ -109,16 +112,16 @@ public class UIManager : Singleton<UIManager>
             return;
 
         maskSelectionLayout.padding.left = 10;
-        if (!switchedLeftRight)
+        if (switchedLeftRight)
         {
             //l'ultimo switch èra sinistra, quindi era 1.234 e diventa 2.341
-            maskImages[3].sprite = maskImages[0].sprite;
             maskImages[0].sprite = maskImages[1].sprite;
             maskImages[1].sprite = maskImages[2].sprite;
             maskImages[2].sprite = maskImages[3].sprite;
+            maskImages[3].sprite = maskImages[0].sprite;
         }
         //la mask che sta a destra è quella che compare a sinistra
-        StartCoroutine(LerpToInTime(0.2f, 10, -120));
+        StartCoroutine(LerpToInTime(switchTime, 10, -120));
 
         switchedLeftRight = true;
     }
