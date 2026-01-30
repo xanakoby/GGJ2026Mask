@@ -360,6 +360,7 @@ public class Player : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(clawAttackPoint.position, clawAttackRadius, enemyMask);
         foreach (var hit in hitColliders)
         {
+            Debug.Log("Hit: " + hit.name);
             Damageable damageable = hit.GetComponent<Damageable>();
             if(damageable != null)
             {
