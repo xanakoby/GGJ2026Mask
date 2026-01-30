@@ -7,6 +7,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        cinemachineCam.Follow = GameManager.Instance.player.transform;
+        cinemachineCam.Follow = GameManager.Instance.player.clawAttackPoint;
     }
 }
