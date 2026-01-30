@@ -111,6 +111,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""385d3dc0-c021-4c92-b8a0-30d240777b89"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""182db880-9d7b-461b-aca3-026ce2a4d960"",
@@ -150,6 +159,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""RMask"",
                     ""type"": ""Button"",
                     ""id"": ""72a06f94-73aa-4bd5-b65b-74ed0eed11a3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BearClawAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ccdac18f-4d4e-4fb7-b201-08d842b0a3b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FrogTongueAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""891d98d8-e8c9-42e6-b449-c039eeb80eba"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -277,6 +304,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RMask"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b2e7c1c-f83e-42bc-bba2-5d4b3333ae78"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BearClawAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce8e55e5-3e65-409a-9036-5a07d753dbd0"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cc2e9d4-5061-4ffe-9935-6f244bb0387e"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FrogTongueAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -287,11 +347,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInput = asset.FindActionMap("PlayerInput", throwIfNotFound: true);
         m_PlayerInput_Movement = m_PlayerInput.FindAction("Movement", throwIfNotFound: true);
         m_PlayerInput_Jump = m_PlayerInput.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerInput_Dash = m_PlayerInput.FindAction("Dash", throwIfNotFound: true);
         m_PlayerInput_Interact = m_PlayerInput.FindAction("Interact", throwIfNotFound: true);
         m_PlayerInput_ChangeMask = m_PlayerInput.FindAction("ChangeMask", throwIfNotFound: true);
         m_PlayerInput_Pause = m_PlayerInput.FindAction("Pause", throwIfNotFound: true);
         m_PlayerInput_LMask = m_PlayerInput.FindAction("LMask", throwIfNotFound: true);
         m_PlayerInput_RMask = m_PlayerInput.FindAction("RMask", throwIfNotFound: true);
+        m_PlayerInput_BearClawAttack = m_PlayerInput.FindAction("BearClawAttack", throwIfNotFound: true);
+        m_PlayerInput_FrogTongueAttack = m_PlayerInput.FindAction("FrogTongueAttack", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -374,11 +437,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerInputActions> m_PlayerInputActionsCallbackInterfaces = new List<IPlayerInputActions>();
     private readonly InputAction m_PlayerInput_Movement;
     private readonly InputAction m_PlayerInput_Jump;
+    private readonly InputAction m_PlayerInput_Dash;
     private readonly InputAction m_PlayerInput_Interact;
     private readonly InputAction m_PlayerInput_ChangeMask;
     private readonly InputAction m_PlayerInput_Pause;
     private readonly InputAction m_PlayerInput_LMask;
     private readonly InputAction m_PlayerInput_RMask;
+    private readonly InputAction m_PlayerInput_BearClawAttack;
+    private readonly InputAction m_PlayerInput_FrogTongueAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerInput".
     /// </summary>
@@ -399,6 +465,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_PlayerInput_Jump;
         /// <summary>
+        /// Provides access to the underlying input action "PlayerInput/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_PlayerInput_Dash;
+        /// <summary>
         /// Provides access to the underlying input action "PlayerInput/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_PlayerInput_Interact;
@@ -418,6 +488,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerInput/RMask".
         /// </summary>
         public InputAction @RMask => m_Wrapper.m_PlayerInput_RMask;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerInput/BearClawAttack".
+        /// </summary>
+        public InputAction @BearClawAttack => m_Wrapper.m_PlayerInput_BearClawAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerInput/FrogTongueAttack".
+        /// </summary>
+        public InputAction @FrogTongueAttack => m_Wrapper.m_PlayerInput_FrogTongueAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -450,6 +528,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -465,6 +546,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RMask.started += instance.OnRMask;
             @RMask.performed += instance.OnRMask;
             @RMask.canceled += instance.OnRMask;
+            @BearClawAttack.started += instance.OnBearClawAttack;
+            @BearClawAttack.performed += instance.OnBearClawAttack;
+            @BearClawAttack.canceled += instance.OnBearClawAttack;
+            @FrogTongueAttack.started += instance.OnFrogTongueAttack;
+            @FrogTongueAttack.performed += instance.OnFrogTongueAttack;
+            @FrogTongueAttack.canceled += instance.OnFrogTongueAttack;
         }
 
         /// <summary>
@@ -482,6 +569,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -497,6 +587,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RMask.started -= instance.OnRMask;
             @RMask.performed -= instance.OnRMask;
             @RMask.canceled -= instance.OnRMask;
+            @BearClawAttack.started -= instance.OnBearClawAttack;
+            @BearClawAttack.performed -= instance.OnBearClawAttack;
+            @BearClawAttack.canceled -= instance.OnBearClawAttack;
+            @FrogTongueAttack.started -= instance.OnFrogTongueAttack;
+            @FrogTongueAttack.performed -= instance.OnFrogTongueAttack;
+            @FrogTongueAttack.canceled -= instance.OnFrogTongueAttack;
         }
 
         /// <summary>
@@ -552,6 +648,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -586,5 +689,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRMask(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BearClawAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBearClawAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FrogTongueAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFrogTongueAttack(InputAction.CallbackContext context);
     }
 }

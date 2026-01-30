@@ -21,19 +21,16 @@ public class Damageable : MonoBehaviour
     public bool takeDamageOnStay = true;
     public List<Damager> damagers;
 
-    [SerializeField] bool isPlayer; //se player allora mi sottoscrivo ai messaggi di aggiormaneti danni
+    [SerializeField] bool isPlayer;
     [SerializeField] bool debugPlayer;
 
     private void Start()
     {
-        //poi il current Health viene settato dal salvataggio
+        currentHealth = maxHealth;
         if (isPlayer)
         {
-            currentHealth = maxHealth; //tmp
-            //HealthUIManager.Instance.UpdateHealth(currentHealth);
+            UIManager.Instance.UpdateHealthDisplay(currentHealth);
         }
-        else
-            currentHealth = maxHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D col)

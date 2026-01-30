@@ -2,23 +2,31 @@ using DesignPatterns.Generics;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.iOS;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private PlayerInput playerInput;
 
+    [Header("Mask Vars")]
     [SerializeField] private HorizontalLayoutGroup maskSelectionLayout;
     [SerializeField] private Image[] maskImages;
     [SerializeField] float switchTime = 0.2f;
+    bool isSwitchingMask;
+    bool switchedLeftRight;
+
     //public CanvasGroup maskSelectionObj;
     //[SerializeField] private RectTransform boardMaskSelection;
     //[SerializeField] private RectTransform handle;
     //bool isSelectingMask;
     //public Vector2 analogDirection;
+
+    [Header("Health Vars")]
+    [SerializeField] private Image[] healths;
+
+    [Header("Canvas Vars")]
     [SerializeField] private CanvasGroup pause;
-    bool isSwitchingMask;
-    bool switchedLeftRight;
 
     public override void Awake()
     {
@@ -85,6 +93,8 @@ public class UIManager : Singleton<UIManager>
 
     //    handle.anchoredPosition = normalizedInput * radius;
     //}
+
+    #region MASK METHODS
     public void SwitchToLeftMask()
     {
         if (isSwitchingMask)
@@ -153,5 +163,35 @@ public class UIManager : Singleton<UIManager>
 
         isSwitchingMask = false;
     }
+    #endregion
+    #region HEALTH METHODS
+    public void UpdateHealthDisplay(int currentHealth)
+    {
+       for (int i = 0; i < healths.Length; i++)
+        {
+            if (i < currentHealth)
+            {
+                healths[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                healths[i].gameObject.SetActive(false);
+            }
+        }
+    }
+    #endregion
+    #region PAUSE METHODS
+    public void ShowPauseMenu()
+    {
+        pause.gameObject.SetActive(true);
+        //pause.alpha = 1;
+        //pause.blocksRaycasts = true;
+        //pause.interactable = true;
+    }
+    public void HidePauseMenu()
+    {
+        pause.gameObject.SetActive(false);
+    }
+    #endregion
 }
 

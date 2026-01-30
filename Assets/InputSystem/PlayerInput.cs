@@ -12,12 +12,15 @@ public class PlayerInput : Singleton<PlayerInput>, PlayerControls.IPlayerInputAc
     public Action OnPlayerStandAction;
     public Action OnPlayerJumpAction;
     public Action OnPlayerStopHoldJumpAction;
+    public Action OnDashAction;
     public Action OnPauseAction;
     public Action OnInteractionAction;
     public Action OnHoldSwitchMask;
     public Action OnUnHoldSwitchMask;
     public Action OnSwitchLMask;
     public Action OnSwitchRMask;
+    public Action OnBearClawAttackAction;
+    public Action OnFrogTongueAttackAction;
 
     public PlayerControls controllers;
 
@@ -118,6 +121,30 @@ public class PlayerInput : Singleton<PlayerInput>, PlayerControls.IPlayerInputAc
         if (context.phase == InputActionPhase.Performed)
         {
             OnSwitchRMask?.Invoke();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnDashAction?.Invoke();
+        }
+    }
+
+    public void OnBearClawAttack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnBearClawAttackAction?.Invoke();
+        }
+    }
+
+    public void OnFrogTongueAttack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnFrogTongueAttackAction?.Invoke();
         }
     }
 }

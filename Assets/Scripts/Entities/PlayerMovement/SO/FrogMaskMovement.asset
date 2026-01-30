@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2845e306ccab34a8ca76efecd214aa, type: 3}
   m_Name: FrogMaskMovement
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementData
+  MovementName: Frog
   Speed: 3
   JumpForce: 10
   GravityAdded: 0
