@@ -46,6 +46,8 @@ public class UIManager : Singleton<UIManager>
         //{
         //    analogDirection = Vector2.zero;
         //};
+        playerInput = GameManager.Instance.playerInput;
+
         playerInput.OnSwitchLMask += SwitchToLeftMask;
         playerInput.OnSwitchRMask += SwitchToRightMask;
     }

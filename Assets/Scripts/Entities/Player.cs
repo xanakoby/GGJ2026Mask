@@ -24,6 +24,13 @@ public class Player : MonoBehaviour
     public int clawDamage;
 
     [Header("Frog Tongue Attack Vars")]
+    public Transform tongue;
+    public Transform tongueAttackPoint;
+    public LineRenderer tongueLineRenderer;
+    public float tongueRange;
+    [Tooltip("il tempo che ci mette ad arrivare la lingua al punto più estremo")]
+    public float tongueDurationToMaxRange;
+    [Tooltip("Il cooldown non può durare meno della tongueDurationToMaxRange * 2")]
     public float tongueAttackCooldown;
     public int tongueDamage;
 
@@ -32,14 +39,16 @@ public class Player : MonoBehaviour
 
     [Header("Movement Vars")]
     public Vector2 _moveInput;
+    public Vector2 lastDir;
     public float speed;
     public float gravitiAdded;
     public float jumpForce;
 
     [Header("Dash Vars")]
     public float dashForce;
-    public float dashCooldown;
-    public float dashDuration;
+    public float dashDuration = 0.5f;
+    [Tooltip("Il cooldown non può durare meno della dashDuration")]
+    public float dashCooldown = 1f;
 
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
@@ -59,7 +68,7 @@ public class Player : MonoBehaviour
 
     [Space]
     public float SwitchMaskCoolDown = 0.2f;
-    public bool CanSwitchMask = true;
+    public bool IsSwitchingMask = true;
     public bool IsCatMask;
     public bool IsBearMask;
     public bool IsFrogMask;
@@ -67,6 +76,9 @@ public class Player : MonoBehaviour
     public bool debug;
     private void Awake()
     {
+        GameManager.Instance.player = this;
+        GameManager.Instance.playerInput = playerInput;
+
         StateMachine = new GenericStateMachine<ECharacterState>();
 
         StateMachine.RegisterState(ECharacterState.Idle, new IdleCharacterState(this));
@@ -80,6 +92,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //debugging?
+        tongue.gameObject.SetActive(false);
+        tongueLineRenderer.gameObject.SetActive(false);
+
         SetMaskMovementData(MaskMovement[0]);
     }
 
@@ -125,7 +140,8 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move();
+        if (!IsDashing)
+            Move();
     }
     private void OnEnable()
     {
@@ -134,6 +150,14 @@ public class Player : MonoBehaviour
         {
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
+
+            if (!IsDashing)
+            {
+                lastDir.x = playerInput.MovementX;
+                lastDir.y = playerInput.MovementY;
+            }
+
+            CheckDirectionToFace(_moveInput.x > 0);
 
             IsMoving = true;
         };
@@ -163,9 +187,11 @@ public class Player : MonoBehaviour
         playerInput.OnDashAction += () =>
         {
             //controllo se posso dashare
+            if (CanDash())
+                Dash();
         };
 
-        playerInput.OnBearClawAttackAction += BearClawAttack;;
+        playerInput.OnBearClawAttackAction += BearClawAttack; ;
         playerInput.OnFrogTongueAttackAction += FrogTongueAttack;
 
         //playerInput.OnHoldSwitchMask += SwitchMaskHold;
@@ -180,6 +206,15 @@ public class Player : MonoBehaviour
         {
             _moveInput.x = playerInput.MovementX;
             _moveInput.y = playerInput.MovementY;
+
+            if (!IsDashing)
+            {
+                lastDir.x = playerInput.MovementX;
+                lastDir.y = playerInput.MovementY;
+            }
+
+            CheckDirectionToFace(_moveInput.x > 0);
+
             IsMoving = true;
         };
         playerInput.OnPlayerStandAction -= () =>
@@ -205,6 +240,15 @@ public class Player : MonoBehaviour
             if (CanJumpCut())
                 JumpCut();
         };
+        playerInput.OnDashAction -= () =>
+        {
+            //controllo se posso dashare
+            if (CanDash())
+                Dash();
+        };
+
+        playerInput.OnBearClawAttackAction -= BearClawAttack; ;
+        playerInput.OnFrogTongueAttackAction -= FrogTongueAttack;
 
         //playerInput.OnHoldSwitchMask -= SwitchMaskHold;
         //playerInput.OnUnHoldSwitchMask -= SwitchMaskUnHold;
@@ -221,9 +265,13 @@ public class Player : MonoBehaviour
     public void Turn()
     {
         //stores scale and flips the player along the x axis, 
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        //Vector3 scale = transform.localScale;
+        //scale.x *= -1;
+        //transform.localScale = scale;
+
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 180;
+        transform.eulerAngles = rotation;
 
         IsFacingRight = !IsFacingRight;
     }
@@ -258,8 +306,34 @@ public class Player : MonoBehaviour
     }
     private void JumpCut()
     {
-        if(rb.linearVelocity.y > 0)
+        if (rb.linearVelocity.y > 0)
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    }
+    #endregion
+    #region DASH METHODS
+    private void Dash()
+    {
+        StartCoroutine(StartDash());
+    }
+    private bool CanDash()
+    {
+        if (IsDashing || !IsCatMask || !IsSwitchingMask)
+            return false;
+        else
+            return true;
+    }
+    private IEnumerator StartDash()
+    {
+        IsDashing = true;
+        float time = 0;
+        while (time <= dashDuration)
+        {
+            time += Time.deltaTime;
+            rb.linearVelocity = new Vector3(lastDir.normalized.x * dashForce, 0, 0);
+            yield return null;
+        }
+        yield return new WaitForSeconds(dashCooldown - dashDuration);
+        IsDashing = false;
     }
     #endregion
     #region MASK METHODS
@@ -285,19 +359,28 @@ public class Player : MonoBehaviour
         jumpForce = mask.JumpForce;
         gravitiAdded = mask.GravityAdded;
 
-        switch(mask.MovementName)
+        switch (mask.MovementName)
         {
             case "Cat":
                 currentMask = EMaskType.Cat;
-                    Debug.Log("Current Mask set to Cat");
+                Debug.Log("Current Mask set to Cat");
+                IsCatMask = true;
+                IsBearMask = false;
+                IsFrogMask = false;
                 break;
             case "Bear":
                 currentMask = EMaskType.Bear;
                 Debug.Log("Current Mask set to Bear");
+                IsCatMask = false;
+                IsBearMask = true;
+                IsFrogMask = false;
                 break;
             case "Frog":
                 currentMask = EMaskType.Frog;
                 Debug.Log("Current Mask set to Frog");
+                IsCatMask = false;
+                IsBearMask = false;
+                IsFrogMask = true;
                 break;
             default:
                 currentMask = EMaskType.None;
@@ -307,13 +390,13 @@ public class Player : MonoBehaviour
     }
     IEnumerator MaskSwitchCooldown()
     {
-        CanSwitchMask = false;
+        IsSwitchingMask = false;
         yield return new WaitForSeconds(SwitchMaskCoolDown);
-        CanSwitchMask = true;
+        IsSwitchingMask = true;
     }
     private void SwitchLeftMask()
     {
-        if (!CanSwitchMask)
+        if (!IsSwitchingMask)
             return;
         if (IsAttacking)
             return;
@@ -328,9 +411,7 @@ public class Player : MonoBehaviour
     }
     private void SwitchRightMask()
     {
-        if (!CanSwitchMask)
-            return;
-        if (IsAttacking)
+        if (!IsSwitchingMask || IsAttacking || IsDashing)
             return;
 
         currentMaskIndex++;
@@ -341,11 +422,13 @@ public class Player : MonoBehaviour
         SetMaskMovementData(MaskMovement[currentMaskIndex]);
         UIManager.Instance.SwitchToRightMask();
     }
+    #endregion
+    #region ATTACKS METHODS
 
     private void BearClawAttack()
     {
         //posso attaccare solo se non sto già attaccando
-        if (IsAttacking)
+        if (IsAttacking || !IsBearMask || !IsSwitchingMask)
             return;
 
         StartCoroutine(ClawAttackCoroutine());
@@ -362,7 +445,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Hit: " + hit.name);
             Damageable damageable = hit.GetComponent<Damageable>();
-            if(damageable != null)
+            if (damageable != null)
             {
                 damageable.TakeDamage(clawDamage);
             }
@@ -373,26 +456,71 @@ public class Player : MonoBehaviour
     private void FrogTongueAttack()
     {
         //posso attaccare solo se non sto già attaccando
-        if (IsAttacking)
+        if (IsAttacking || IsDashing || !IsSwitchingMask)
             return;
 
         StartCoroutine(TongueAttackCoroutine());
     }
     IEnumerator TongueAttackCoroutine()
     {
+        //a seconda della last dir tiro la lingua in quella direzione
+        //la lingua che è una sfera con renderline va da dal player al
+        //punto più lontano in quella direzione entro il
+        //
+        //tongueSpeedToMaxRange
+
+
         IsAttacking = true;
-        yield return new WaitForSeconds(tongueAttackCooldown);
+        tongue.transform.position = transform.position;
+        tongueAttackPoint.transform.position = lastDir * tongueRange;
+
+        tongue.gameObject.SetActive(true);
+        tongueAttackPoint.gameObject.SetActive(true);
+        tongueLineRenderer.gameObject.SetActive(true);
+
+        float time = 0;
+        while (time < tongueDurationToMaxRange)
+        {
+            time += Time.deltaTime;
+            Vector3 transitioningPos = Vector3.Lerp(transform.position, tongueAttackPoint.transform.position, time / tongueDurationToMaxRange);
+            tongueAttackPoint.transform.position = transitioningPos;
+
+            tongueLineRenderer.SetPosition(0, transform.position);
+            tongueLineRenderer.SetPosition(1, tongue.transform.position);
+
+            yield return null;
+        }
+        time = 0;
+        while (time < tongueDurationToMaxRange)
+        {
+            time += Time.deltaTime;
+            Vector3 transitioningPos = Vector3.Lerp(tongueAttackPoint.transform.position, transform.position, time / tongueDurationToMaxRange);
+            tongueAttackPoint.transform.position = transitioningPos;
+
+            tongueLineRenderer.SetPosition(0, transform.position);
+            tongueLineRenderer.SetPosition(1, tongue.transform.position);
+
+            yield return null;
+        }
+
+        tongue.gameObject.SetActive(false);
+        tongueAttackPoint.gameObject.SetActive(false);
+        tongueLineRenderer.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(tongueAttackCooldown - (tongueDurationToMaxRange * 2));
+
         IsAttacking = false;
     }
-
     #endregion
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(_groundCheckPoint.position, _groundCheckSize);
-        
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(clawAttackPoint.position, clawAttackRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, tongueRange);
     }
 }

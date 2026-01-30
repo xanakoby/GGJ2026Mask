@@ -13,6 +13,8 @@ public class LevelSceneStarter : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.player.transform.position = startScenePlayerPos;
+
         startSceneActions?.Invoke();
         if (triggerAfterDelay)
         {
