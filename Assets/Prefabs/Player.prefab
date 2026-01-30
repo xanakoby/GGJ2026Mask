@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 3196870069345045333}
   - component: {fileID: 6503103932492594528}
   - component: {fileID: 1852352455208053182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ MonoBehaviour:
   gravitiAdded: 0
   jumpForce: 0
   dashForce: 5
-  dashDuration: 1
+  dashDuration: 0.25
   dashCooldown: 1.5
   _groundLayer:
     serializedVersion: 2
@@ -368,6 +368,7 @@ MonoBehaviour:
   IsGrounded: 0
   IsFalling: 0
   IsDashing: 0
+  DashCooldown: 0
   IsAttacking: 0
   SwitchMaskCoolDown: 0.2
   IsSwitchingMask: 1
