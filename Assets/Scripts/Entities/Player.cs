@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     public bool IsFalling;
     //public bool IsSelectingMask;
     public bool IsDashing;
+    public bool DashCooldown;
     public bool IsAttacking;
 
     [Space]
@@ -317,7 +318,7 @@ public class Player : MonoBehaviour
     }
     private bool CanDash()
     {
-        if (IsDashing || !IsCatMask || !IsSwitchingMask)
+        if (IsDashing || !IsCatMask || !IsSwitchingMask || DashCooldown)
             return false;
         else
             return true;
@@ -325,6 +326,7 @@ public class Player : MonoBehaviour
     private IEnumerator StartDash()
     {
         IsDashing = true;
+        DashCooldown = true;
         float time = 0;
         while (time <= dashDuration)
         {
@@ -334,6 +336,7 @@ public class Player : MonoBehaviour
         }
         IsDashing = false;
         yield return new WaitForSeconds(dashCooldown - dashDuration);
+        DashCooldown = false;
     }
     #endregion
     #region MASK METHODS
