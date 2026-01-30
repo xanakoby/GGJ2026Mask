@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FrogMaskMovement
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementData
   MovementName: Frog
-  Speed: 3
-  JumpForce: 10
-  GravityAdded: 0
+  Speed: 4
+  JumpForce: 13
+  GravityAdded: 5

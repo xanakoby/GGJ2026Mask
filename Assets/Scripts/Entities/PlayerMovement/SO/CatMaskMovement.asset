@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CatMaskMovement
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementData
   MovementName: Cat
-  Speed: 10
-  JumpForce: 5
-  GravityAdded: -2
+  Speed: 5
+  JumpForce: 11
+  GravityAdded: 5

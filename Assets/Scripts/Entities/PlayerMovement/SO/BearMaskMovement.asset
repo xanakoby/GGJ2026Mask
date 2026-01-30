@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BearMaskMovement
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementData
   MovementName: Bear
-  Speed: 2
-  JumpForce: 2
-  GravityAdded: 2
+  Speed: 3.5
+  JumpForce: 10
+  GravityAdded: 6
