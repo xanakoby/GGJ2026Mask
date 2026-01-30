@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class Various : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Message(string _msg)
     {
-        
+        Debug.Log(_msg);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void ChangeSceneee(string _sceneName)
     {
-        
+        GameManager.Instance.ChangeScene(_sceneName);
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1016870568616593623}
   - component: {fileID: 8315467026826003823}
   - component: {fileID: 5238989194504421019}
+  - component: {fileID: -8026412125169982367}
   m_Layer: 0
   m_Name: InteractableCube
   m_TagString: Untagged
@@ -155,3 +156,15 @@ MonoBehaviour:
   player: {fileID: 0}
   triggerOn: 0
   triggerOnAnything: 0
+--- !u!114 &-8026412125169982367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293775421081126335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96b5603085fd024ca7d7045f2f6da41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Various
