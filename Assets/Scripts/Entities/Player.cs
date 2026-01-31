@@ -518,6 +518,7 @@ public class Player : MonoBehaviour
     IEnumerator ClawAttackCoroutine()
     {
         IsAttacking = true;
+        UpdateAnimClawTrigger();
 
         yield return new WaitForSeconds(clawAttackAfterTime);
         Debug.Log("Bear Claw Attack");
@@ -602,7 +603,10 @@ public class Player : MonoBehaviour
     private void UpdateAnimIsDashing()
     {
         characterAnimator.SetTrigger("DashTrigger");
-
+    }
+    private void UpdateAnimClawTrigger()
+    {
+        characterAnimator.SetTrigger("ClawTrigger");
     }
     #endregion   
     private void OnDrawGizmos()
