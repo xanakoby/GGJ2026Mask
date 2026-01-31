@@ -21,6 +21,7 @@ public class MonsterBedEnemy : MonoBehaviour
     [SerializeField] private bool isEnemyClose;
 
     [SerializeField] private float attackCooldown;
+    bool keepAttacking;
 
     private void Start()
     {
@@ -30,11 +31,11 @@ public class MonsterBedEnemy : MonoBehaviour
         sight.exitedSight += PlayerExitRange;
 
         sight2.enteredSight += PlayerCloseRange;
-        sight2.enteredSight += PlayerNoMoreCloseRange;
+        sight2.exitedSight += PlayerNoMoreCloseRange;
     }
     private void FixedUpdate()
     {
-        if (!isEnemyClose)
+        if (!isEnemyClose && !keepAttacking)
             Move();
     }
     private void Move()
@@ -60,7 +61,7 @@ public class MonsterBedEnemy : MonoBehaviour
                 }
             }
         }
-        else if(isEnemyInSight && !isEnemyClose)
+        else if(isEnemyInSight)
         {
             //insegue il player
             playerTransform = GameManager.Instance.player.transform;
@@ -109,11 +110,20 @@ public class MonsterBedEnemy : MonoBehaviour
     }
     IEnumerator JumpAttack()
     {
-        rb.linearVelocity = Vector3.zero;
-        Vector3 direction = (playerTransform.position - rb.position).normalized;
-        rb.AddForce(new Vector3(direction.x * jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+        keepAttacking = isEnemyClose;
+        while (keepAttacking)
+        {
+            rb.linearVelocity = Vector3.zero;
+            Vector3 direction = (playerTransform.position - rb.position).normalized;
+            rb.AddForce(new Vector3(direction.x * jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
 
-        yield return new WaitForSeconds(attackCooldown);
+            Debug.Log("saltooooo attaccoooo");
+
+            yield return new WaitForSeconds(attackCooldown);
+            keepAttacking = isEnemyClose;
+        }
+
+        Debug.Log("basta saltare attaccare");
     }
 
     private void OnDrawGizmos()

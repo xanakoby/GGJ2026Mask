@@ -12,6 +12,7 @@ public class ClownEnemy : MonoBehaviour
     [SerializeField] bool isMovingRight;
 
     [SerializeField] private bool isEnemyInSight;
+    bool keepAttacking;
 
     [Header("Clown Vars")]
     [SerializeField] float attackAnimation = 3f;
@@ -24,7 +25,7 @@ public class ClownEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isEnemyInSight)
+        if(!keepAttacking)
         MoveThroughPatterns();
     }
     private void MoveThroughPatterns()
@@ -52,6 +53,8 @@ public class ClownEnemy : MonoBehaviour
     private void PlayerEnterRange()
     {
         isEnemyInSight = true;
+        if (keepAttacking)
+            return;
         StartCoroutine(ClownStartAttacking());
     }
     private void PlayerExitRange()
@@ -64,10 +67,14 @@ public class ClownEnemy : MonoBehaviour
         //il nemico si ferma e carica l'attacco verso il giocatore
         rb.linearVelocity = Vector3.zero;
 
-        while (isEnemyInSight)
+        keepAttacking = isEnemyInSight;
+        while (keepAttacking)
         {
             //fa l'animazione di attacco
             yield return new WaitForSeconds(attackAnimation);
+            yield return null;
+            Debug.Log("Clown Attaccoooooo");
+            keepAttacking = isEnemyInSight;
         }
         Debug.Log("Enemy started Walking!");
 

@@ -165,13 +165,13 @@ GameObject:
   - component: {fileID: 5828996769218075093}
   - component: {fileID: 8806467263050667210}
   - component: {fileID: 6530942156063785465}
-  - component: {fileID: 1220164761668810801}
+  - component: {fileID: 1769951532229350818}
   - component: {fileID: 2076462855623690269}
   - component: {fileID: 6132916281164657215}
   - component: {fileID: 3196870069345045333}
   - component: {fileID: 6503103932492594528}
   - component: {fileID: 1852352455208053182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,14 +252,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1220164761668810801
-BoxCollider:
+--- !u!136 &1769951532229350818
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956950776373927296}
-  m_Material: {fileID: 13400000, guid: 918a13596cad107459496885797c65a0, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -270,9 +270,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9, y: 0.95, z: 1}
-  m_Center: {x: 0, y: -0.035, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.34
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2076462855623690269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -333,9 +335,6 @@ MonoBehaviour:
   currentMaskIndex: 0
   maskNoneMovement: {fileID: 11400000, guid: 63f5dbe39786417488b23196179b03ac, type: 2}
   switchTime: 0.2
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 128
   clawAttackPoint: {fileID: 8484694590706384714}
   clawAttackRadius: 0.5
   clawAttackAfterTime: 0.2
@@ -349,20 +348,28 @@ MonoBehaviour:
   tongueAttackCooldown: 2.5
   tongueDamage: 1
   rb: {fileID: 2076462855623690269}
+  damageable: {fileID: 1852352455208053182}
   _moveInput: {x: 0, y: 0}
   lastDir: {x: 0, y: 0}
   speed: 0
   gravitiAdded: 0
   jumpForce: 0
+  jumpCooldown: 0
+  bounceOnEnemyForce: 10
+  bounceDamage: 1
   dashForce: 13
   dashDuration: 0.15
   dashCooldown: 1
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   _groundCheckPoint: {fileID: 8691807083401656905}
-  _groundCheckSize: {x: 0.3, y: 0.2, z: 0.3}
+  _groundCheckSize: {x: 0.6, y: 0.2, z: 0.6}
   IsFacingRight: 0
+  IsJumping: 0
   IsMoving: 0
   IsWalking: 0
   IsGrounded: 0
