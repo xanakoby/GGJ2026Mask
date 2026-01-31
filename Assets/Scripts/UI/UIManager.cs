@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private HorizontalLayoutGroup maskSelectionLayout;
     [SerializeField] private Image[] maskImages;
     [SerializeField] private Image[] buttonToPress;
+    [SerializeField] private GameObject[] mask;
     [SerializeField] float switchTime = 0.2f;
     bool isSwitchingMask;
     bool switchedLeftRight;
@@ -176,7 +177,12 @@ public class UIManager : Singleton<UIManager>
         {
             img.gameObject.SetActive(false);
         }
+        foreach(GameObject m in mask)
+        {
+            m.SetActive(false);
+        }
         buttonToPress[indexMask].gameObject.SetActive(true);
+        mask[indexMask].SetActive(true);
     }
     #endregion
     #region HEALTH METHODS
