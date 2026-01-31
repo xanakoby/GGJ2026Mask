@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1408e74e6a23a434f9e8e738c9ba8460
+guid: 77c540bfa80da034a98e7f40fcbd543e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -121,7 +121,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: bacino
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c42735e057f5af442abe4b8124602b1e
+guid: 20f83cf5d9582de4a8a752aa9e51ff64
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|STARTING JUMP IDLE
-      takeName: Armature|STARTING JUMP IDLE
-      internalID: -3874213042235337198
-      firstFrame: 11.3
-      lastFrame: 20
+      name: Armature.001|AMELIE FROG ATTACK (MASK)
+      takeName: Armature.001|AMELIE FROG ATTACK (MASK)
+      internalID: 1315596119793266717
+      firstFrame: 0
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -70,8 +70,8 @@ ModelImporter:
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -121,15 +121,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: bacino
+    rootMotionBoneName: Armature.001
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

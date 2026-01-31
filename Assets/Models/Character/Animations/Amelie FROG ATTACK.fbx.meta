@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c42735e057f5af442abe4b8124602b1e
+guid: 75d0f6e8d69148844bceb97fad2665e3
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|STARTING JUMP IDLE
-      takeName: Armature|STARTING JUMP IDLE
-      internalID: -3874213042235337198
-      firstFrame: 11.3
-      lastFrame: 20
+      name: Armature|AMELIE FROG ATTACK (BODY)
+      takeName: Armature|AMELIE FROG ATTACK (BODY)
+      internalID: 1315596119793266717
+      firstFrame: 0
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
