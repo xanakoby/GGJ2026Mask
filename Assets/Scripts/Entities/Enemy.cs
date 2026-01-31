@@ -3,12 +3,9 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Pagliaccio,
-    MostroLetto,
-    Ragno,
-    Temporale,
-    Fantasma,
-    Febbre
+    Clown,
+    Spider,
+    Feever
 }
 public class Enemy : MonoBehaviour
 {
@@ -49,57 +46,11 @@ public class Enemy : MonoBehaviour
     }
     private void PlayerEnterRange()
     {
-        switch(enemyType)
-        {
-            case EnemyType.Pagliaccio:
-                StartCoroutine(ClownStartAttacking());
-                break;
-            case EnemyType.MostroLetto:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Ragno:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Temporale:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Fantasma:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Febbre:
-                //StartCoroutine(StartAttacking());
-                break;
-            default:
-                break;
-        }
+       
     }
     private void PlayerExitRange()
     {
-        switch (enemyType)
-        {
-            case EnemyType.Pagliaccio:
-
-                StopCoroutine(ClownStartAttacking());
-                //e torna al patrolling
-                break;
-            case EnemyType.MostroLetto:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Ragno:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Temporale:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Fantasma:
-                //StartCoroutine(StartAttacking());
-                break;
-            case EnemyType.Febbre:
-                //StartCoroutine(StartAttacking());
-                break;
-            default:
-                break;
-        }
+        
     }
     private void MoveThroughPatterns()
     {

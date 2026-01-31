@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FeeverEnemy
   m_EditorClassIdentifier: 
   Name: Feever
-  ItemPrefab: {fileID: 0}
+  ItemPrefab: {fileID: -4068470522108000559, guid: a22e8dd5bb6257e4e9a452b5ddd9c2ee, type: 3}

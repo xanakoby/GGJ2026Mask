@@ -351,6 +351,7 @@ MonoBehaviour:
   tongueDamage: 1
   rb: {fileID: 2076462855623690269}
   damageable: {fileID: 1852352455208053182}
+  graphicsTransform: {fileID: 7531399659695282022}
   _moveInput: {x: 0, y: 0}
   lastDir: {x: 0, y: 0}
   speed: 0

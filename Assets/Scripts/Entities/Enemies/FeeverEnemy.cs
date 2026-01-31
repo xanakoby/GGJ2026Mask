@@ -4,12 +4,17 @@ using UnityEngine;
 public class FeeverEnemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Vector2 pointA;
-    [SerializeField] private Vector2 pointB;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float leftDistance = -2;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float rightDistance = 2;
     [SerializeField] private float speed = 2f;
     [SerializeField] private GenericSight sight;
     [SerializeField] bool isMovingRight;
     [SerializeField] private Transform playerTransform;
+
+    [SerializeField] private Vector2 pointA;
+    [SerializeField] private Vector2 pointB;
 
     [SerializeField] private bool isEnemyInSight;
     public bool IsFacingRight;
@@ -18,13 +23,29 @@ public class FeeverEnemy : MonoBehaviour
     [SerializeField] private float chargeShotTime;
     [SerializeField] private float waitAfterShotTime;
 
+    public Transform graphicsTransform;
+    public float prospettiveRotationDif = 50f;
+
+    bool elapsedFirstFrame;
+
     private void Start()
     {
         sight.enteredSight += PlayerEnterRange;
         sight.exitedSight += PlayerExitRange;
     }
+    private void OnDisable()
+    {
+        StopCoroutine(StartShooting());
+        elapsedFirstFrame = false;
+}
     private void FixedUpdate()
     {
+        if (!elapsedFirstFrame)
+        {
+            pointA = new Vector2(transform.position.x + leftDistance, 0);
+            pointB = new Vector2(transform.position.x + rightDistance, 0);
+            elapsedFirstFrame = true;
+        }
         if (!keepAttacking)
             MoveThroughPatterns();
     }
@@ -56,13 +77,13 @@ public class FeeverEnemy : MonoBehaviour
         isEnemyInSight = true;
         if (keepAttacking)
             return;
-        StartCoroutine(ClownStartAttacking());
+        StartCoroutine(StartShooting());
     }
     private void PlayerExitRange()
     {
         isEnemyInSight = false;
     }
-    IEnumerator ClownStartAttacking()
+    IEnumerator StartShooting()
     {
         playerTransform = GameManager.Instance.player.transform;
 
@@ -104,6 +125,18 @@ public class FeeverEnemy : MonoBehaviour
         Vector3 rotation = transform.eulerAngles;
         rotation.y += 180;
         transform.eulerAngles = rotation;
+
+        Vector3 rotationGraphic = graphicsTransform.eulerAngles;
+        if (IsFacingRight)
+        {
+            rotationGraphic.y -= prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
+        else
+        {
+            rotationGraphic.y += prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
 
         IsFacingRight = !IsFacingRight;
     }

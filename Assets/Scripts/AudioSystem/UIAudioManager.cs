@@ -10,19 +10,19 @@ public class UIAudioManager : MonoBehaviour
 
     public void OnOfMusic()
     {
-        AudioManager.instance.OnOffMusic();
+        AudioManager.Instance.OnOffMusic();
     }
     public void OnOfSFX()
     {
-        AudioManager.instance.OnOffSFX();
+        AudioManager.Instance.OnOffSFX();
     }
 
     public void ChangeMusicVolume()
     {
-        AudioManager.instance.MusicVolume(musicSlider.value);
+        AudioManager.Instance.MusicVolume(musicSlider.value);
     }
     public void ChangeSFXVolume()
     {
-        AudioManager.instance.MusicVolume(sfxSlider.value);
+        AudioManager.Instance.MusicVolume(sfxSlider.value);
     }
 }

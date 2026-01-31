@@ -45,21 +45,25 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region SPAWN ENEMY 
-    public void CreateClownEnemy(Transform transform)
+    public GameObject CreateClownEnemy(Transform transform)
     {
-        enemyFactory.CreateClownEnemy(_clownEnemy, transform.position, Quaternion.identity);
+        ItemBase itemBase = (ItemBase)enemyFactory.CreateClownEnemy(_clownEnemy, transform.position, Quaternion.identity);
+        return itemBase.gameObject;
     }
-    public void CreateBedMonsterEnemy(Transform transform)
+    public GameObject CreateBedMonsterEnemy(Transform transform)
     {
-        enemyFactory.CreateBedMonsterEnemy(_bedMonsterEnemy, transform.position, Quaternion.identity);
+        ItemBase itemBase = (ItemBase)enemyFactory.CreateBedMonsterEnemy(_bedMonsterEnemy, transform.position, Quaternion.identity);
+        return itemBase.gameObject;
     }
-    public void CreateFeeverEnemy(Transform transform)
+    public GameObject CreateFeeverEnemy(Transform transform)
     {
-        enemyFactory.CreateFeeverEnemy(_feeverEnemy, transform.position, Quaternion.identity);
+        ItemBase itemBase = (ItemBase)enemyFactory.CreateFeeverEnemy(_feeverEnemy, transform.position, Quaternion.identity);
+        return itemBase.gameObject;
     }
-    public void CreateSpiderEnemy(Transform transform)
+    public GameObject CreateSpiderEnemy(Transform transform)
     {
-        enemyFactory.CreateSpiderEnemy(_spiderEnemy, transform.position, Quaternion.identity);
+        ItemBase itemBase = (ItemBase)enemyFactory.CreateSpiderEnemy(_spiderEnemy, transform.position, Quaternion.identity);
+        return itemBase.gameObject;
     }
     #endregion
     #region SPAWN BULLETS

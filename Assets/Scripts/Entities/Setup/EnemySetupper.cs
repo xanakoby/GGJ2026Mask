@@ -11,6 +11,8 @@ public class EnemySetupper : MonoBehaviour
     public Damageable damageable;
     private void Start()
     {
+        damageable.onDeath.RemoveAllListeners();
+
         damageable.onDeath.AddListener(() =>
         {
             itemBase.onDestroyTrigger?.Invoke();
