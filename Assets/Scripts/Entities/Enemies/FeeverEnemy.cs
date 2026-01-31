@@ -27,6 +27,7 @@ public class FeeverEnemy : MonoBehaviour
     public float prospettiveRotationDif = 50f;
 
     bool elapsedFirstFrame;
+    Coroutine attackCoroutine;
 
     private void Start()
     {
@@ -35,7 +36,11 @@ public class FeeverEnemy : MonoBehaviour
     }
     private void OnDisable()
     {
-        StopCoroutine(StartShooting());
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(StartShooting());
+            attackCoroutine = null;
+        }
         elapsedFirstFrame = false;
 }
     private void FixedUpdate()
@@ -77,7 +82,7 @@ public class FeeverEnemy : MonoBehaviour
         isEnemyInSight = true;
         if (keepAttacking)
             return;
-        StartCoroutine(StartShooting());
+        attackCoroutine = StartCoroutine(StartShooting());
     }
     private void PlayerExitRange()
     {
