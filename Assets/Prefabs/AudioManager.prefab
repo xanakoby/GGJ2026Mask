@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13189184576271665}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.68140346, y: 7.311899, z: -0.033284243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -48,8 +48,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSounds:
   - name: Theme
-    clip: {fileID: 0}
-  sfxSounds: []
+    clip: {fileID: 8300000, guid: a6bed2da7cf21ef4d8ed42a1d9ec3f8e, type: 3}
+  - name: Harp
+    clip: {fileID: 8300000, guid: d222a27d86f9c454eb66affaca12429f, type: 3}
+  - name: FluteHarp
+    clip: {fileID: 8300000, guid: acb23263b256dd6449ae9c193f4f1515, type: 3}
+  - name: Darkbells
+    clip: {fileID: 8300000, guid: ef43e02637fd9bf4cabe163d4353e67f, type: 3}
+  - name: BellsHarp
+    clip: {fileID: 8300000, guid: 1dcf000690413ff4fa5b3a5861b833b9, type: 3}
+  sfxSounds:
+  - name: C_Step1
+    clip: {fileID: 8300000, guid: 06d907b9b420d6d4bbb4b8df09381361, type: 3}
+  - name: C_Step2
+    clip: {fileID: 8300000, guid: 2580f6de105f7104eb4fe397c8a8f684, type: 3}
+  - name: C_Step3
+    clip: {fileID: 8300000, guid: 3214f1ec7b1ad2b4e9462d748c2a014b, type: 3}
+  - name: C_Step4
+    clip: {fileID: 8300000, guid: f620360cd010f084abc9a0f2b865d488, type: 3}
+  - name: C_Step5
+    clip: {fileID: 8300000, guid: 56aef0bc8ac016c46aea212e941d2d26, type: 3}
+  - name: C_Jump1
+    clip: {fileID: 8300000, guid: 9e9d4209dae51bf4992de50d1389f3de, type: 3}
+  - name: C_Jump2
+    clip: {fileID: 8300000, guid: db6c0a3a30981aa4d87bd511a3c363ef, type: 3}
+  - name: C_Damage
+    clip: {fileID: 8300000, guid: 6f229ae4b0dda8a4b87f688d4ca2c3b6, type: 3}
+  - name: C_Land1
+    clip: {fileID: 8300000, guid: 887a5998f4afa00418e84c2ee8530fb0, type: 3}
+  - name: C_Land2
+    clip: {fileID: 8300000, guid: 334055792eac9e64fb61d6c97485ec20, type: 3}
+  - name: C_Cat_Dash1
+    clip: {fileID: 8300000, guid: a53d333a818ff4c4881e22124b299a2a, type: 3}
+  - name: C_Cat_Dash2
+    clip: {fileID: 8300000, guid: 3b9ca8ab01dfd304aacaa4c3310cb6bb, type: 3}
+  - name: C_Bear_Claw
+    clip: {fileID: 8300000, guid: 3d9cab6cbcc5aee47b5504e56455d21d, type: 3}
+  - name: C_Bear_ClawHit
+    clip: {fileID: 8300000, guid: 0193579f4114ccd489aa16746d0c1b0b, type: 3}
+  - name: C_Frog_Tongue
+    clip: {fileID: 8300000, guid: f97a8e9db34777344b7d56dc069f595f, type: 3}
+  - name: C_Frog_TongueHit
+    clip: {fileID: 8300000, guid: 1a03aec584cc21748a85c232e0f1bd27, type: 3}
+  - name: E_Clown_Jump
+    clip: {fileID: 8300000, guid: 91dfe7d26a20e1f4a87e26380b8a5713, type: 3}
+  - name: E_Clown_Chuckle
+    clip: {fileID: 8300000, guid: 09eab4f1f36b1c84691de094259d53a4, type: 3}
+  - name: E_Clown_Swing1
+    clip: {fileID: 8300000, guid: 2702182f92f1305439af52c2c265f6a5, type: 3}
+  - name: E_Clown_Swing2
+    clip: {fileID: 8300000, guid: 98aa5050ea66af645bde37077adc32cf, type: 3}
+  - name: E_Fever_Charge
+    clip: {fileID: 8300000, guid: 32849144d7c00a44782629074dfffca3, type: 3}
+  - name: E_Fever_Sneeze
+    clip: {fileID: 8300000, guid: 27f6595f63e821e4784b9263bee4db17, type: 3}
+  - name: E_Clown_Swing3
+    clip: {fileID: 8300000, guid: 1a03aec584cc21748a85c232e0f1bd27, type: 3}
   musicSource: {fileID: 7726385566490239321}
   sfxSource: {fileID: 2419411846034095459}
 --- !u!1 &5607265804767833861
