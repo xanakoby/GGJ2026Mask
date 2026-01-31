@@ -21,6 +21,8 @@ public class ClownEnemy : MonoBehaviour
     bool keepAttacking;
     bool elapsedFirstFrame;
 
+    Coroutine attackCoroutine;
+
     [Header("Clown Vars")]
     [SerializeField] float attackAnimation = 3f;
     public Transform graphicsTransform;
@@ -39,7 +41,11 @@ public class ClownEnemy : MonoBehaviour
     //}
     private void OnDisable()
     {
-        StopCoroutine(ClownStartAttacking());
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(ClownStartAttacking());
+            attackCoroutine = null;
+        }
         elapsedFirstFrame = false;
     }
 
@@ -83,7 +89,7 @@ public class ClownEnemy : MonoBehaviour
         isEnemyInSight = true;
         if (keepAttacking)
             return;
-        StartCoroutine(ClownStartAttacking());
+        attackCoroutine = StartCoroutine(ClownStartAttacking());
     }
     private void PlayerExitRange()
     {
