@@ -24,13 +24,11 @@ public class Player : MonoBehaviour
     public int clawDamage;
 
     [Header("Frog Tongue Attack Vars")]
-    public Transform tongue;
-    public Transform tongueAttackPoint;
-    public LineRenderer tongueLineRenderer;
-    public float tongueRange;
-    [Tooltip("il tempo che ci mette ad arrivare la lingua al punto più estremo")]
-    public float tongueDurationToMaxRange;
-    [Tooltip("Il cooldown non può durare meno della tongueDurationToMaxRange * 2")]
+    public Animator tongueAnimator;
+    public Animator frogMaskAnimator;
+    Coroutine tongueCoroutine;
+
+    public Tongue tongue;
     public float tongueAttackCooldown;
     public int tongueDamage;
 
@@ -103,10 +101,15 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //debugging?
-        tongue.gameObject.SetActive(false);
-        tongueLineRenderer.gameObject.SetActive(false);
+        //tongue.gameObject.SetActive(false);
 
+        //tongue.OnColEnter += InterruptTongueAnim;
         SetMaskMovementData(MaskMovement[0]);
+
+        damageable.onDeath.AddListener(() =>
+        {
+            GameManager.Instance.Respawn();
+        });
     }
 
     public void SetState(ECharacterState newState)
@@ -275,7 +278,7 @@ public class Player : MonoBehaviour
     //funzione che verrà chiamata quando riavvio la scena per ricaricare perchè SONO MORTOOOO magari da pensarci poi
     public void SetupPlayer()
     {
-
+        damageable.SetFullHealth();
     }
     #region CHECK METHODS
     private void OnCollisionEnter(Collision col)
@@ -535,61 +538,53 @@ public class Player : MonoBehaviour
     }
     private void FrogTongueAttack()
     {
+        return;
+        //damageable fixare quando avrò i models
         //posso attaccare solo se non sto già attaccando
         if (IsAttacking || IsDashing || !IsSwitchingMask)
             return;
 
-        StartCoroutine(TongueAttackCoroutine());
+        tongueCoroutine = StartCoroutine(TongueAttackCoroutine());
     }
     IEnumerator TongueAttackCoroutine()
     {
-        //a seconda della last dir tiro la lingua in quella direzione
-        //la lingua che è una sfera con renderline va da dal player al
-        //punto più lontano in quella direzione entro il
-        //
-        //tongueSpeedToMaxRange
-
-
         IsAttacking = true;
-        tongue.transform.position = transform.position;
-        tongueAttackPoint.transform.position = lastDir * tongueRange;
-
         tongue.gameObject.SetActive(true);
-        tongueAttackPoint.gameObject.SetActive(true);
-        tongueLineRenderer.gameObject.SetActive(true);
+        //a seconda della dir faccio determinata animazione
+        tongueAnimator.SetTrigger("AttackTrigger");
+        frogMaskAnimator.SetTrigger("AttackTrigger");
 
-        float time = 0;
-        while (time < tongueDurationToMaxRange)
-        {
-            time += Time.deltaTime;
-            Vector3 transitioningPos = Vector3.Lerp(transform.position, tongueAttackPoint.transform.position, time / tongueDurationToMaxRange);
-            tongueAttackPoint.transform.position = transitioningPos;
-
-            tongueLineRenderer.SetPosition(0, transform.position);
-            tongueLineRenderer.SetPosition(1, tongue.transform.position);
-
-            yield return null;
-        }
-        time = 0;
-        while (time < tongueDurationToMaxRange)
-        {
-            time += Time.deltaTime;
-            Vector3 transitioningPos = Vector3.Lerp(tongueAttackPoint.transform.position, transform.position, time / tongueDurationToMaxRange);
-            tongueAttackPoint.transform.position = transitioningPos;
-
-            tongueLineRenderer.SetPosition(0, transform.position);
-            tongueLineRenderer.SetPosition(1, tongue.transform.position);
-
-            yield return null;
-        }
+        //mi prendo la durata dell'animazione di tongue attack
+        float tongueAttackDuration = tongueAnimator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(tongueAttackDuration / 2); //aspetto metà animazione per attivare la lingua
+        //ha raggiunto la fine dell'estensione, quindi torno a casa
 
         tongue.gameObject.SetActive(false);
-        tongueAttackPoint.gameObject.SetActive(false);
-        tongueLineRenderer.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(tongueAttackCooldown - (tongueDurationToMaxRange * 2));
+        yield return new WaitForSeconds(tongueAttackCooldown);
 
         IsAttacking = false;
+    }
+    public void InterruptTongueAnim()
+    {
+        if (tongueCoroutine != null)
+        {
+            StopCoroutine(tongueCoroutine);
+            tongueCoroutine = null;
+        }
+
+        AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
+        float interruptedAnimTime = info.normalizedTime % 1f;
+
+        tongueAnimator.SetFloat("StopFrame", interruptedAnimTime);
+        tongueAnimator.SetTrigger("HitTrigger");
+
+        frogMaskAnimator.SetFloat("StopFrame", interruptedAnimTime);
+        frogMaskAnimator.SetTrigger("HitTrigger");
+
+        tongue.gameObject.SetActive(false);
+        //passo il parametro del frame in cui interrompo l'animazione
+
     }
     #endregion
     #region ANIMATOR UPDATES
@@ -617,8 +612,5 @@ public class Player : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(clawAttackPoint.position, clawAttackRadius);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, tongueRange);
     }
 }

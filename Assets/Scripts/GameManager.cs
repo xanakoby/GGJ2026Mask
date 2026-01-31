@@ -1,5 +1,6 @@
 using DesignPatterns.Generics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -38,6 +39,12 @@ public class GameManager : Singleton<GameManager>
 
             rb.isKinematic = false;
         }
+    }
+    public void Respawn()
+    {
+        player.SetupPlayer();
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
     public void CalculateDamagerToPlayer(Damager dam)
     {
