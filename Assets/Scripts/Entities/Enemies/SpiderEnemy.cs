@@ -13,6 +13,8 @@ public class SpiderEnemy : MonoBehaviour
     [SerializeField] private bool isMovingRight;
     [SerializeField] private float jumpCooldown = 1f;
     [SerializeField] private bool endlessJump;
+    public Transform graphicsTransform;
+    public float prospettiveRotationDif = 50f;
 
 
     [SerializeField] private bool isPlayerInSight;
@@ -94,6 +96,18 @@ public class SpiderEnemy : MonoBehaviour
         Vector3 rotation = transform.eulerAngles;
         rotation.y += 180;
         transform.eulerAngles = rotation;
+
+        Vector3 rotationGraphic = graphicsTransform.eulerAngles;
+        if (IsFacingRight)
+        {
+            rotationGraphic.y -= prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
+        else
+        {
+            rotationGraphic.y += prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
 
         IsFacingRight = !IsFacingRight;
     }

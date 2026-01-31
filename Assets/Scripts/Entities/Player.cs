@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     [Header("Refs")]
     public Rigidbody rb;
     public Damageable damageable;
+    public Transform graphicsTransform;
+    public float prospettiveRotationDif = 50f;
 
     [Header("Movement Vars")]
     public Vector2 _moveInput;
@@ -331,6 +333,18 @@ public class Player : MonoBehaviour
         Vector3 rotation = transform.eulerAngles;
         rotation.y += 180;
         transform.eulerAngles = rotation;
+
+        Vector3 rotationGraphic = graphicsTransform.eulerAngles;
+        if (IsFacingRight)
+        {
+            rotationGraphic.y -= prospettiveRotationDif*2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
+        else
+        {
+            rotationGraphic.y += prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
 
         IsFacingRight = !IsFacingRight;
     }

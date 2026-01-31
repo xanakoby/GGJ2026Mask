@@ -7,7 +7,7 @@ using DesignPatterns.Generics;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    public static AudioManager instance;
+    //public static AudioManager instance;
 
     public Sound[] musicSounds;
     public Sound[] sfxSounds;
@@ -46,9 +46,34 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            musicSource.clip = s.clip;
-            musicSource.Play();
+            //fa fade in fade out tra musica
+
+            //musicSource.clip = s.clip;
+            //musicSource.Play();
+
+            StartCoroutine(FadeInOutMusic(s));
         }
+    }
+    IEnumerator FadeInOutMusic(Sound s)
+    {
+        float currentTime = 0;
+        float startVolume = musicSource.volume;
+        while (currentTime < 0.5f)
+        {
+            currentTime += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume, 0, currentTime / 0.5f);
+            yield return null;
+        }
+        musicSource.clip = s.clip;
+        musicSource.Play();
+        currentTime = 0;
+        while (currentTime < 0.5f)
+        {
+            currentTime += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(0, startVolume, currentTime / 0.5f);
+            yield return null;
+        }
+        yield return null;
     }
 
     public void PlaySFX(string name)

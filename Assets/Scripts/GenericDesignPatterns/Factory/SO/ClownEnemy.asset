@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ClownEnemy
   m_EditorClassIdentifier: 
   Name: Clown
-  ItemPrefab: {fileID: 3712215583076895604, guid: a76149005d2014e4f990982feb0b61be, type: 3}
+  ItemPrefab: {fileID: -5092750425233426235, guid: a76149005d2014e4f990982feb0b61be, type: 3}

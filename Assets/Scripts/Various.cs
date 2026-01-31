@@ -10,9 +10,13 @@ public class Various : MonoBehaviour
     {
         GameManager.Instance.ChangeScene(_sceneName);
     }
+    public void PlayMusic(string musicName)
+    {
+        AudioManager.Instance.PlayMusic(musicName);
+    }
     public void PlaySound(string soundName)
     {
-        AudioManager.instance.PlaySFX(soundName);
+        AudioManager.Instance.PlaySFX(soundName);
     }
     #region SPAWN ENEMY 
     public void CreateClownEnemy(Transform transform)

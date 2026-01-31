@@ -23,6 +23,8 @@ public class ClownEnemy : MonoBehaviour
 
     [Header("Clown Vars")]
     [SerializeField] float attackAnimation = 3f;
+    public Transform graphicsTransform;
+    public float prospettiveRotationDif = 50f;
 
     private void Start()
     {
@@ -111,6 +113,18 @@ public class ClownEnemy : MonoBehaviour
         Vector3 rotation = transform.eulerAngles;
         rotation.y += 180;
         transform.eulerAngles = rotation;
+
+        Vector3 rotationGraphic = graphicsTransform.eulerAngles;
+        if (IsFacingRight)
+        {
+            rotationGraphic.y -= prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
+        else
+        {
+            rotationGraphic.y += prospettiveRotationDif * 2;
+            graphicsTransform.eulerAngles = rotationGraphic;
+        }
 
         IsFacingRight = !IsFacingRight;
     }

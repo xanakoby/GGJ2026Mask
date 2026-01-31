@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   cinemachineCam: {fileID: 6170935641154986063}
+  confiner: {fileID: 4152985158790887000}
 --- !u!1 &4533929500002801928
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 4533929500002801928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -241,6 +242,7 @@ GameObject:
   - component: {fileID: 3651693865888755930}
   - component: {fileID: 6170935641154986063}
   - component: {fileID: 2252433166911692890}
+  - component: {fileID: 4152985158790887000}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -257,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 8818889379675167986}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -337,3 +339,23 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &4152985158790887000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818889379675167986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineConfiner2D
+  BoundingShape2D: {fileID: 0}
+  Damping: 0.5
+  SlowingDistance: 5
+  OversizeWindow:
+    Enabled: 0
+    MaxWindowSize: 0
+    Padding: 0
+  m_LegacyMaxWindowSize: -2

@@ -4,8 +4,10 @@ using UnityEngine;
 public class MonsterBedEnemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Vector2 pointA;
-    [SerializeField] private Vector2 pointB;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float leftDistance = -2;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float rightDistance = 2;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float runSpeed = 5f;
     private float currentSpeed;
@@ -15,6 +17,9 @@ public class MonsterBedEnemy : MonoBehaviour
     [SerializeField] private GenericSight sight2;
     [SerializeField] private Transform playerTransform;
 
+    [SerializeField] private Vector2 pointA;
+    [SerializeField] private Vector2 pointB;
+
     [SerializeField] bool isMovingRight;
 
     [SerializeField] private bool isEnemyInSight;
@@ -23,6 +28,7 @@ public class MonsterBedEnemy : MonoBehaviour
 
     [SerializeField] private float attackCooldown;
     bool keepAttacking;
+    bool elapsedFirstFrame;
 
     private void Start()
     {
@@ -39,8 +45,19 @@ public class MonsterBedEnemy : MonoBehaviour
         isEnemyClose = false;
         keepAttacking = false;
     }
+    private void OnDisable()
+    {
+        StopCoroutine(JumpAttack());
+        elapsedFirstFrame = false;
+    }
     private void FixedUpdate()
     {
+        if (!elapsedFirstFrame)
+        {
+            pointA = new Vector2(transform.position.x + leftDistance, 0);
+            pointB = new Vector2(transform.position.x + rightDistance, 0);
+            elapsedFirstFrame = true;
+        }
         if (!isEnemyClose && !keepAttacking)
             Move();
     }
