@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
   currentHealth: 1
-  maxHealth: 5
+  maxHealth: 8
   onDamageTaken:
     m_PersistentCalls:
       m_Calls: []
