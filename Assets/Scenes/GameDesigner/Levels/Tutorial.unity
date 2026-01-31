@@ -2455,7 +2455,7 @@ GameObject:
   - component: {fileID: 1615873045}
   - component: {fileID: 1615873049}
   m_Layer: 0
-  m_Name: Ugly (1)
+  m_Name: Heal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
