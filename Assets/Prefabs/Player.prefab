@@ -357,7 +357,7 @@ MonoBehaviour:
   gravitiAdded: 0
   jumpForce: 0
   jumpCooldown: 0
-  bounceOnEnemyForce: 10
+  bounceOnEnemyForce: 8
   bounceDamage: 1
   dashForce: 13
   dashDuration: 0.15

@@ -577,7 +577,6 @@ public class Player : MonoBehaviour
     private void UpdateAnimSpeed()
     {
         characterAnimator.SetFloat("speed", rb.linearVelocity.magnitude);
-        print(rb.linearVelocity.magnitude);
     }
     private void UpdateAnimIsGrounded()
     {

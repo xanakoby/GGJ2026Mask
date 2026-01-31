@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c42735e057f5af442abe4b8124602b1e
+guid: 001cfc5e7ed8e6c4f88bd08a28bcfdfa
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -15,7 +15,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: 
+    motionNodeName: <Root Transform>
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|STARTING JUMP IDLE
-      takeName: Armature|STARTING JUMP IDLE
-      internalID: -3874213042235337198
-      firstFrame: 11.3
-      lastFrame: 20
+      name: Armature|clown jump
+      takeName: Armature|clown jump
+      internalID: 871042639721430887
+      firstFrame: 0
+      lastFrame: 53
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -121,15 +121,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
