@@ -693,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &299263579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12996,7 +12996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1041836498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14988,8 +14988,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: triggerOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -15004,6 +15008,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2129117901}
@@ -15012,7 +15024,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1236461592}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1041836497}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 299263578}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
@@ -15028,12 +15056,36 @@ PrefabInstance:
       value: SetBounding
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Spawner, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: CameraController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -15052,8 +15104,32 @@ PrefabInstance:
       value: prova che funzionaaaa
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+      value: prova che funzionaaaa
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_StringArgument
+      value: prova che funzionaaaa
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Collider2D, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
