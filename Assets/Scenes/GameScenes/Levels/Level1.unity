@@ -1472,6 +1472,61 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547298601}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1586806582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7011449923767535771, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
+  m_PrefabInstance: {fileID: 241211512152749535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586806589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586806582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f065f63b09edac49a117f46d47f7412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damager
+  value: 1
+  damageType: 0
+--- !u!114 &1586806590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586806582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456fb762afc6a5f469a738a9c0ee09ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  currentHealth: 1
+  maxHealth: 3
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  canBeImmortalAfterDamage: 0
+  onStartImmortal:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopImmortal:
+    m_PersistentCalls:
+      m_Calls: []
+  canTakeDamage: 1
+  immortalTime: 1
+  takeDamageOnStay: 1
+  damagers: []
+  isPlayer: 0
+  debugPlayer: 0
 --- !u!4 &1675208145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1072071459138487254, guid: ae1ee7b626f2bf445835fb9f99f054ec, type: 3}
@@ -1973,8 +2028,16 @@ PrefabInstance:
       value: MonsterBedEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7011449923767535771, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011449923767535771, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025561086029220694, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
+      propertyPath: attackCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8548445702328392341, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2019,7 +2082,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7011449923767535771, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1586806590}
+    - targetCorrespondingSourceObject: {fileID: 7011449923767535771, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1586806589}
   m_SourcePrefab: {fileID: 100100000, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}
 --- !u!1001 &1579765573498760128
 PrefabInstance:
@@ -2427,6 +2496,10 @@ PrefabInstance:
     - target: {fileID: 6197798274169843703, guid: 43dfb45c98ca5e14599767bbed41163d, type: 3}
       propertyPath: m_Name
       value: SpiderEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197798274169843703, guid: 43dfb45c98ca5e14599767bbed41163d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
