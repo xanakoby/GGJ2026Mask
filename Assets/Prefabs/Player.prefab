@@ -352,6 +352,7 @@ MonoBehaviour:
   rb: {fileID: 2076462855623690269}
   damageable: {fileID: 1852352455208053182}
   graphicsTransform: {fileID: 7531399659695282022}
+  prospettiveRotationDif: 50
   _moveInput: {x: 0, y: 0}
   lastDir: {x: 0, y: 0}
   speed: 0
@@ -360,7 +361,7 @@ MonoBehaviour:
   jumpCooldown: 0
   bounceOnEnemyForce: 8
   bounceDamage: 1
-  dashForce: 13
+  dashForce: 15
   dashDuration: 0.15
   dashCooldown: 1
   _groundLayer:
