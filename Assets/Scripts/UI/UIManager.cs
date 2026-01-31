@@ -114,7 +114,7 @@ public class UIManager : Singleton<UIManager>
             
         }
         //la mask che sta a sinistra è quella che compare a destra
-        StartCoroutine(LerpToInTime(0.2f, -120, 10));
+        StartCoroutine(LerpToInTime(switchTime, -120, 10));
 
         switchedLeftRight = false;
     }
@@ -133,7 +133,7 @@ public class UIManager : Singleton<UIManager>
             maskImages[3].sprite = maskImages[0].sprite;
         }
         //la mask che sta a destra è quella che compare a sinistra
-        StartCoroutine(LerpToInTime(switchTime, 10, -120));
+        StartCoroutine(LerpToInTime(switchTime, 10, -170));
 
         switchedLeftRight = true;
     }
