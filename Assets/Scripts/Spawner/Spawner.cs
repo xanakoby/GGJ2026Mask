@@ -49,7 +49,9 @@ public class Spawner : MonoBehaviour
                 foreach (EnemySpawn enemySpawn in firstWaveEnemies)
                 {
                     //spawno tutti dal primo punto per ora, altrimenti random?
-                    SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
+                    GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
+                    Damageable damageable = g.GetComponent<Damageable>();
+                    damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
@@ -61,7 +63,9 @@ public class Spawner : MonoBehaviour
                 foreach (EnemySpawn enemySpawn in secondWaveEnemies)
                 {
                     //spawno tutti dal primo punto per ora, altrimenti random?
-                    SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
+                    GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
+                    Damageable damageable = g.GetComponent<Damageable>();
+                    damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
