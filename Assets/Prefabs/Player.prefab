@@ -260,7 +260,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956950776373927296}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 918a13596cad107459496885797c65a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -730,7 +730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.34202018
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalRotation.x
@@ -738,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.9396926
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalRotation.z
@@ -750,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -760,6 +760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmelieModel
       objectReference: {fileID: 0}
+    - target: {fileID: 2111211106497090718, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8992c168f88342542ab39b3da5a143e8, type: 2}
     - target: {fileID: 5866666021909216657, guid: dbf2fe7f42d655e4ba89e5d7fc0cab43, type: 3}
       propertyPath: m_Controller
       value: 
