@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 6726434227354789770}
   - component: {fileID: 2603682896405264146}
   - component: {fileID: 3958717328039821196}
-  m_Layer: 0
+  - component: {fileID: 6664977440704156240}
+  m_Layer: 9
   m_Name: TongueDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,6 +155,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damager
   value: 1
   damageType: 0
+--- !u!114 &6664977440704156240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93307323417239884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800b5dda82fdffd4fb058ea99c01b042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tongue
 --- !u!1 &1956950776373927296
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,10 +357,6 @@ MonoBehaviour:
   tongueAnimator: {fileID: 0}
   frogMaskAnimator: {fileID: 0}
   tongue: {fileID: 3907302027225114404}
-  tongueAttackPoint: {fileID: 8574128472234283070}
-  tongueLineRenderer: {fileID: 0}
-  tongueRange: 4
-  tongueDurationToMaxRange: 1
   tongueAttackCooldown: 2.5
   tongueDamage: 1
   rb: {fileID: 2076462855623690269}

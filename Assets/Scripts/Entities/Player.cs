@@ -101,10 +101,15 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //debugging?
-        tongue.gameObject.SetActive(false);
+        //tongue.gameObject.SetActive(false);
 
-        tongue.OnColEnter += InterruptTongueAnim;
+        //tongue.OnColEnter += InterruptTongueAnim;
         SetMaskMovementData(MaskMovement[0]);
+
+        damageable.onDeath.AddListener(() =>
+        {
+            GameManager.Instance.Respawn();
+        });
     }
 
     public void SetState(ECharacterState newState)
@@ -273,7 +278,7 @@ public class Player : MonoBehaviour
     //funzione che verrà chiamata quando riavvio la scena per ricaricare perchè SONO MORTOOOO magari da pensarci poi
     public void SetupPlayer()
     {
-
+        damageable.SetFullHealth();
     }
     #region CHECK METHODS
     private void OnCollisionEnter(Collision col)
@@ -533,6 +538,8 @@ public class Player : MonoBehaviour
     }
     private void FrogTongueAttack()
     {
+        return;
+        //damageable fixare quando avrò i models
         //posso attaccare solo se non sto già attaccando
         if (IsAttacking || IsDashing || !IsSwitchingMask)
             return;

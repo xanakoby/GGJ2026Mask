@@ -1609,9 +1609,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7645022999498941870}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CreateClownEnemy
+      - m_Target: {fileID: 1866833977}
+        m_TargetAssemblyTypeName: Various, Assembly-CSharp
+        m_MethodName: CreateSpiderEnemy
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 909140403}
@@ -2642,17 +2642,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb690885a1220014d951516468ee2cbd, type: 3}
---- !u!114 &7645022999498941870 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-  m_PrefabInstance: {fileID: 7645022999498941869}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1502c80ec2c5c4c8e988d9cf27e04d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1001 &9182407417788514308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2661,17 +2650,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 93307323417239884, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 1956950776373927296, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3196870069345045333, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
-      propertyPath: tongueLineRenderer
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5828996769218075093, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2716,28 +2697,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 93307323417239884, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9182407417788514310}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
---- !u!1 &9182407417788514309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 93307323417239884, guid: d336d6b0fe0c0c34196f6bda6fc661fc, type: 3}
-  m_PrefabInstance: {fileID: 9182407417788514308}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9182407417788514310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9182407417788514309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800b5dda82fdffd4fb058ea99c01b042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tongue
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
