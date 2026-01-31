@@ -2465,6 +2465,10 @@ MonoBehaviour:
   - {fileID: 3066597933650562948}
   - {fileID: 9037684771805691371}
   - {fileID: 5988287030053671053}
+  mask:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   switchTime: 0.2
   healths:
   - {fileID: 3918272094648934778}
