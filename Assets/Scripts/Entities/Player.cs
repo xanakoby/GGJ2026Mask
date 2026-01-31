@@ -414,7 +414,6 @@ public class Player : MonoBehaviour
             yield return null;
         }
         IsDashing = false;
-        UpdateAnimIsDashing();
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         DashCooldown = false;
     }
@@ -602,7 +601,8 @@ public class Player : MonoBehaviour
     }
     private void UpdateAnimIsDashing()
     {
-        characterAnimator.SetBool("isDashing", IsDashing);
+        characterAnimator.SetTrigger("DashTrigger");
+
     }
     #endregion   
     private void OnDrawGizmos()
