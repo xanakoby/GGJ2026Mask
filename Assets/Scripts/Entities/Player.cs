@@ -270,6 +270,11 @@ public class Player : MonoBehaviour
         playerInput.OnSwitchLMask -= SwitchLeftMask;
         playerInput.OnSwitchRMask -= SwitchRightMask;
     }
+    //funzione che verrà chiamata quando riavvio la scena per ricaricare perchè SONO MORTOOOO magari da pensarci poi
+    public void SetupPlayer()
+    {
+
+    }
     #region CHECK METHODS
     private void OnCollisionEnter(Collision col)
     {

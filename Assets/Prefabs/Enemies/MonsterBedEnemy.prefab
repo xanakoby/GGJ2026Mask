@@ -154,6 +154,8 @@ GameObject:
   - component: {fileID: 7025561086029220694}
   - component: {fileID: 9216990629566835819}
   - component: {fileID: 2205566784555236719}
+  - component: {fileID: -276492562166288700}
+  - component: {fileID: 4748368913403876897}
   m_Layer: 7
   m_Name: MonsterBedEnemy
   m_TagString: Untagged
@@ -306,6 +308,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   isMovingRight: 0
   isEnemyInSight: 0
+  IsFacingRight: 0
   isEnemyClose: 0
   attackCooldown: 1
 --- !u!114 &9216990629566835819
@@ -358,3 +361,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damager
   value: 1
   damageType: 0
+--- !u!114 &-276492562166288700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011449923767535771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a0b3fae0e4d7946b9953d4d7bf4f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemBase
+--- !u!114 &4748368913403876897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011449923767535771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8501952f9e3774f449b40b2e267811cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySetupper
+  itemBase: {fileID: -276492562166288700}
+  rb: {fileID: 9101162764336871956}
+  damageable: {fileID: 9216990629566835819}

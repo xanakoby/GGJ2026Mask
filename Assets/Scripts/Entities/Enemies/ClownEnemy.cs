@@ -5,14 +5,21 @@ using UnityEngine;
 public class ClownEnemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Vector2 pointA;
-    [SerializeField] private Vector2 pointB;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float leftDistance = -2;
+    [Tooltip("distanza a sinistra rispetto al clown")]
+    [SerializeField] private float rightDistance = 2;
     [SerializeField] private float speed = 2f;
     [SerializeField] private GenericSight sight;
     [SerializeField] bool isMovingRight;
 
+    [SerializeField] private Vector2 pointA;
+    [SerializeField] private Vector2 pointB;
+
     [SerializeField] private bool isEnemyInSight;
+    public bool IsFacingRight;
     bool keepAttacking;
+    bool elapsedFirstFrame;
 
     [Header("Clown Vars")]
     [SerializeField] float attackAnimation = 3f;
@@ -22,9 +29,26 @@ public class ClownEnemy : MonoBehaviour
         sight.enteredSight += PlayerEnterRange;
         sight.exitedSight += PlayerExitRange;
     }
+    //da fare il punto point a b da dove spawno per tutti gli altri
+    //private void OnEnable()
+    //{
+    //    pointA = new Vector2(transform.position.x + leftDistance, 0);
+    //    pointB = new Vector2(transform.position.x + rightDistance, 0);
+    //}
+    private void OnDisable()
+    {
+        StopCoroutine(ClownStartAttacking());
+        elapsedFirstFrame = false;
+    }
 
     private void FixedUpdate()
     {
+        if (!elapsedFirstFrame)
+        {
+            pointA = new Vector2(transform.position.x + leftDistance, 0);
+            pointB = new Vector2(transform.position.x + rightDistance, 0);
+            elapsedFirstFrame = true;
+        }
         if(!keepAttacking)
         MoveThroughPatterns();
     }
@@ -36,6 +60,7 @@ public class ClownEnemy : MonoBehaviour
             rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, 0);
             if(rb.position.x >= pointB.x)
             {
+                Turn();
                 isMovingRight = false;
             }
         }
@@ -45,6 +70,7 @@ public class ClownEnemy : MonoBehaviour
             rb.linearVelocity = new Vector3(-speed, rb.linearVelocity.y, 0);
             if (rb.position.x <= pointA.x)
             {
+                Turn();
                 isMovingRight = true;
             }
         }
@@ -79,6 +105,14 @@ public class ClownEnemy : MonoBehaviour
         Debug.Log("Enemy started Walking!");
 
         yield return null;
+    }
+    public void Turn()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 180;
+        transform.eulerAngles = rotation;
+
+        IsFacingRight = !IsFacingRight;
     }
     private void OnDrawGizmos()
     {
