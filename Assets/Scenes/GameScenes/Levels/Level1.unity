@@ -2462,26 +2462,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-      propertyPath: _clownEnemy
-      value: 
-      objectReference: {fileID: 11400000, guid: 79c3630546a20644c9fa57aa23606c3b, type: 2}
-    - target: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-      propertyPath: _feeverEnemy
-      value: 
-      objectReference: {fileID: 11400000, guid: 121e0cd739b72964daf08e7ba1ea7fda, type: 2}
-    - target: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-      propertyPath: _spiderEnemy
-      value: 
-      objectReference: {fileID: 11400000, guid: 80c09ac20d798fe4cb0c2a22c08cdb5c, type: 2}
-    - target: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-      propertyPath: _sneezeBullet
-      value: 
-      objectReference: {fileID: 11400000, guid: 8fc7ff30b35529a449fc251c9edfad24, type: 2}
-    - target: {fileID: 3147344119870902543, guid: fb690885a1220014d951516468ee2cbd, type: 3}
-      propertyPath: _bedMonsterEnemy
-      value: 
-      objectReference: {fileID: 11400000, guid: 09564e94f7a128340aafcc22d7befc01, type: 2}
     - target: {fileID: 3632410626010456021, guid: fb690885a1220014d951516468ee2cbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

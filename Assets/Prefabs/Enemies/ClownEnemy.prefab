@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 1878556729391370306}
   - component: {fileID: -5092750425233426235}
   - component: {fileID: 2972676798764554634}
-  m_Layer: 0
+  - component: {fileID: 3093417657617582902}
+  m_Layer: 7
   m_Name: ClownEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,6 +234,20 @@ MonoBehaviour:
   itemBase: {fileID: -5092750425233426235}
   rb: {fileID: 2507695588425038446}
   damageable: {fileID: 1878556729391370306}
+--- !u!114 &3093417657617582902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237512228649128236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f065f63b09edac49a117f46d47f7412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damager
+  value: 1
+  damageType: 0
 --- !u!1 &2331851210251804289
 GameObject:
   m_ObjectHideFlags: 0
