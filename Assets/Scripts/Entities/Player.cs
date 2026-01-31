@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     public GenericStateMachine<ECharacterState> StateMachine;
     [SerializeField] private PlayerInput playerInput;
 
+    [Header("Animator")]
+    public Animator characterAnimator;
     [Header("Mask Vars")]
     public EMaskType currentMask = EMaskType.None;
     public PlayerMovementData[] MaskMovement;
@@ -125,6 +127,7 @@ public class Player : MonoBehaviour
 
         #region GRAVITY
         rb.AddForce(Vector3.down * gravitiAdded, ForceMode.Acceleration);
+        UpdateAnimVerticalSpeed();
         #endregion
         #region COLLISION CHECKS
         //se non sono in salto controllo se sono a terra
@@ -271,10 +274,11 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision col)
     {
         Debug.Log("ho toccato " + col.gameObject.name);
-        if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize/2, transform.rotation, _groundLayer))
+        if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize / 2, transform.rotation, _groundLayer))
         {
             IsJumping = false;
             IsGrounded = true;
+            UpdateAnimIsGrounded();
         }
         //ho toccato un nemico
         if (((1 << col.gameObject.layer) & _enemyLayer) != 0)
@@ -285,7 +289,7 @@ public class Player : MonoBehaviour
                 //sono saltato su di un nemico, allora rimbalzo e gli faccio danno
                 rb.AddForce(new Vector3(0, bounceOnEnemyForce, 0), ForceMode.Impulse);
                 Damageable dam = col.gameObject.GetComponent<Damageable>();
-                if(dam != null)
+                if (dam != null)
                 {
                     dam.TakeDamage(bounceDamage);
                 }
@@ -344,6 +348,7 @@ public class Player : MonoBehaviour
     private void Move()
     {
         rb.linearVelocity = new Vector3(_moveInput.x * speed, rb.linearVelocity.y, rb.linearVelocity.z);
+        UpdateAnimSpeed();
     }
     #endregion
     #region JUMP METHODS
@@ -353,6 +358,7 @@ public class Player : MonoBehaviour
 
         IsJumping = true;
         IsGrounded = false;
+        UpdateAnimIsGrounded();
         //HasGoneUp = false;
     }
     private void JumpCut()
@@ -376,6 +382,7 @@ public class Player : MonoBehaviour
     private IEnumerator StartDash()
     {
         IsDashing = true;
+        UpdateAnimIsDashing();
         DashCooldown = true;
         float time = 0;
         while (time <= dashDuration)
@@ -385,6 +392,7 @@ public class Player : MonoBehaviour
             yield return null;
         }
         IsDashing = false;
+        UpdateAnimIsDashing();
         yield return new WaitForSeconds(dashCooldown - dashDuration);
         DashCooldown = false;
     }
@@ -565,6 +573,25 @@ public class Player : MonoBehaviour
         IsAttacking = false;
     }
     #endregion
+    #region ANIMATOR UPDATES
+    private void UpdateAnimSpeed()
+    {
+        characterAnimator.SetFloat("speed", rb.linearVelocity.magnitude);
+        print(rb.linearVelocity.magnitude);
+    }
+    private void UpdateAnimIsGrounded()
+    {
+        characterAnimator.SetBool("isGrounded", IsGrounded);
+    }
+    private void UpdateAnimVerticalSpeed()
+    {
+        characterAnimator.SetFloat("verticalSpeed", rb.linearVelocity.y);
+    }
+    private void UpdateAnimIsDashing()
+    {
+        characterAnimator.SetBool("isDashing", IsDashing);
+    }
+    #endregion   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
