@@ -39,6 +39,10 @@ public class GameManager : Singleton<GameManager>
             rb.isKinematic = false;
         }
     }
+    public void CalculateDamagerToPlayer(Damager dam)
+    {
+        player.damageable.CalculateDamagerValue(dam);
+    }
     public void ChangeScene(string _sceneName)
     {
         LevelManager.Instance.ChangeScene(_sceneName);

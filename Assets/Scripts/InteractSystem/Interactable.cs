@@ -143,4 +143,8 @@ public class Interactable : MonoBehaviour
     {
         interaction?.Invoke();
     }
+    public void GetHealth(Damager dam)
+    {
+        GameManager.Instance.CalculateDamagerToPlayer(dam);
+    }
 }

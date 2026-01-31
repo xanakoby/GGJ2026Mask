@@ -23,14 +23,6 @@ public class Damager : MonoBehaviour
 
         //damageable.CalculateDamagerValue(this);
     }
-    private void OnTriggerEnter(Collider col)
-    {
-        dam = col.gameObject.GetComponent<Damageable>();
-        if(damageType == EDamageType.add)
-        {
-            dam.CalculateDamagerValue(this);
-        }
-    }
 
     //private void OnCollisionExit2D(Collision2D col)
     //{
