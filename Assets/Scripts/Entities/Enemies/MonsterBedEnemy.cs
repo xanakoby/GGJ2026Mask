@@ -18,6 +18,7 @@ public class MonsterBedEnemy : MonoBehaviour
     [SerializeField] bool isMovingRight;
 
     [SerializeField] private bool isEnemyInSight;
+    public bool IsFacingRight;
     [SerializeField] private bool isEnemyClose;
 
     [SerializeField] private float attackCooldown;
@@ -25,13 +26,18 @@ public class MonsterBedEnemy : MonoBehaviour
 
     private void Start()
     {
-        currentSpeed = speed;
 
         sight.enteredSight += PlayerEnterRange;
         sight.exitedSight += PlayerExitRange;
 
         sight2.enteredSight += PlayerCloseRange;
         sight2.exitedSight += PlayerNoMoreCloseRange;
+    }
+    private void OnEnable()
+    {
+        currentSpeed = speed;
+        isEnemyClose = false;
+        keepAttacking = false;
     }
     private void FixedUpdate()
     {
@@ -48,6 +54,7 @@ public class MonsterBedEnemy : MonoBehaviour
                 rb.linearVelocity = new Vector3(currentSpeed, rb.linearVelocity.y, 0);
                 if (rb.position.x >= pointB.x)
                 {
+                    Turn();
                     isMovingRight = false;
                 }
             }
@@ -57,6 +64,7 @@ public class MonsterBedEnemy : MonoBehaviour
                 rb.linearVelocity = new Vector3(-currentSpeed, rb.linearVelocity.y, 0);
                 if (rb.position.x <= pointA.x)
                 {
+                    Turn();
                     isMovingRight = true;
                 }
             }
@@ -76,7 +84,7 @@ public class MonsterBedEnemy : MonoBehaviour
                     //muovi a sinistra
                     rb.linearVelocity = new Vector3(-currentSpeed, rb.linearVelocity.y, 0);
                 }
-            
+            CheckDirectionToFace(rb.position.x < playerTransform.position.x);
         }
     }
 
@@ -125,7 +133,19 @@ public class MonsterBedEnemy : MonoBehaviour
 
         Debug.Log("basta saltare attaccare");
     }
+    public void CheckDirectionToFace(bool isMovingRight)
+    {
+        if (isMovingRight != IsFacingRight)
+            Turn();
+    }
+    public void Turn()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 180;
+        transform.eulerAngles = rotation;
 
+        IsFacingRight = !IsFacingRight;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

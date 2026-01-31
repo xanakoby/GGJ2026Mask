@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f990e8b1325134e9ca62682d4fce2f, type: 3}
+  m_Name: BedMonsterEnemy
+  m_EditorClassIdentifier: 
+  Name: BedMonster
+  ItemPrefab: {fileID: -276492562166288700, guid: aff6559c8defa30429c1e4e35d33ac2e, type: 3}

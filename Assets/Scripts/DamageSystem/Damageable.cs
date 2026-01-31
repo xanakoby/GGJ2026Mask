@@ -84,6 +84,12 @@ public class Damageable : MonoBehaviour
             }
         }
     }
+    public void SetFullHealth()
+    {
+        currentHealth = maxHealth;
+        if (isPlayer)
+            UIManager.Instance.UpdateHealthDisplay(currentHealth);
+    }
     public void CalculateDamagerValue(Damager _damager)
     {
         if (_damager != null)
@@ -105,6 +111,8 @@ public class Damageable : MonoBehaviour
                         currentHealth = 0;
                         //HealthUIManager.Instance.UpdateHealth(currentHealth);
                         onDeath?.Invoke();
+                        if (isPlayer)
+                            UIManager.Instance.UpdateHealthDisplay(currentHealth);
                         return;
                     }
                     else
@@ -139,7 +147,8 @@ public class Damageable : MonoBehaviour
 
                     break;
             }
-            //HealthUIManager.Instance.UpdateHealth(currentHealth);
+            if (isPlayer)
+                UIManager.Instance.UpdateHealthDisplay(currentHealth);
         }
     }
 

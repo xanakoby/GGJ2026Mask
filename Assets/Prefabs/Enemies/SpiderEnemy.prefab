@@ -85,6 +85,8 @@ GameObject:
   - component: {fileID: 2936779156068036960}
   - component: {fileID: 4170455928107840558}
   - component: {fileID: 3956304880155678238}
+  - component: {fileID: 4703495717604179031}
+  - component: {fileID: -4116892217899041933}
   m_Layer: 7
   m_Name: SpiderEnemy
   m_TagString: Untagged
@@ -236,6 +238,7 @@ MonoBehaviour:
   jumpCooldown: 1
   endlessJump: 1
   isPlayerInSight: 0
+  IsFacingRight: 0
   checkCollision: 0
 --- !u!114 &4170455928107840558
 MonoBehaviour:
@@ -299,3 +302,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damager
   value: 1
   damageType: 0
+--- !u!114 &4703495717604179031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197798274169843703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a0b3fae0e4d7946b9953d4d7bf4f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemBase
+--- !u!114 &-4116892217899041933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6197798274169843703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8501952f9e3774f449b40b2e267811cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySetupper
+  itemBase: {fileID: 4703495717604179031}
+  rb: {fileID: 8168583662245193165}
+  damageable: {fileID: 4170455928107840558}

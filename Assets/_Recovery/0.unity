@@ -1778,6 +1778,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1072071459138487254, guid: ae1ee7b626f2bf445835fb9f99f054ec, type: 3}
   m_PrefabInstance: {fileID: 6278823484105429181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1778375535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778375536}
+  m_Layer: 0
+  m_Name: JustToSeeDir
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1778375536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778375535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1579765573498760129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1838912312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,7 +1997,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7645022999498941870}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CreateClownEnemy
+        m_MethodName: CreateBedMonsterEnemy
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 909140403}
@@ -2633,9 +2664,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7262107338622194071, guid: a76149005d2014e4f990982feb0b61be, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1778375536}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76149005d2014e4f990982feb0b61be, type: 3}
+--- !u!4 &1579765573498760129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7262107338622194071, guid: a76149005d2014e4f990982feb0b61be, type: 3}
+  m_PrefabInstance: {fileID: 1579765573498760128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4368097135355578679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3401,7 +3440,6 @@ MonoBehaviour:
   speed: 2
   sight: {fileID: 5249739295020246948}
   isMovingRight: 0
-  playerTransform: {fileID: 0}
   isEnemyInSight: 0
   IsFacingRight: 0
   spawnBulletPoint: {fileID: 1276755770}

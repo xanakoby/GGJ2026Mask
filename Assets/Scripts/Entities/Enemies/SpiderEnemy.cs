@@ -16,6 +16,7 @@ public class SpiderEnemy : MonoBehaviour
 
 
     [SerializeField] private bool isPlayerInSight;
+    public bool IsFacingRight;
     [SerializeField] private bool checkCollision;
     private void Start()
     {
@@ -23,8 +24,14 @@ public class SpiderEnemy : MonoBehaviour
         sight.exitedSight += PlayerExitRange;
 
         playerTransform = GameManager.Instance.player.transform;
-
+    }
+    private void OnEnable()
+    {
         StartCoroutine(Jump());
+    }
+    private void OnDisable()
+    {
+        StopCoroutine(Jump());
     }
     private void PlayerEnterRange()
     {
@@ -47,6 +54,7 @@ public class SpiderEnemy : MonoBehaviour
 
             if (!isPlayerInSight)
             {
+                CheckDirectionToFace(isMovingRight);
                 if (isMovingRight)
                 {
                     rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
@@ -60,6 +68,7 @@ public class SpiderEnemy : MonoBehaviour
             else
             {
                 //salto verso la direzione del player
+                CheckDirectionToFace(rb.position.x < playerTransform.position.x);
                 if (rb.position.x < playerTransform.position.x)
                 {
                     //muovi a destra
@@ -74,6 +83,19 @@ public class SpiderEnemy : MonoBehaviour
 
             yield return new WaitForSeconds(jumpCooldown);
         }
+    }
+    public void CheckDirectionToFace(bool isMovingRight)
+    {
+        if (isMovingRight != IsFacingRight)
+            Turn();
+    }
+    public void Turn()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 180;
+        transform.eulerAngles = rotation;
+
+        IsFacingRight = !IsFacingRight;
     }
     private void OnCollisionEnter(Collision col)
     {

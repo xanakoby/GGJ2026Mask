@@ -9,9 +9,12 @@ public class FeeverEnemy : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private GenericSight sight;
     [SerializeField] bool isMovingRight;
+    [SerializeField] private Transform playerTransform;
 
     [SerializeField] private bool isEnemyInSight;
+    public bool IsFacingRight;
     bool keepAttacking;
+    [SerializeField] private Transform spawnBulletPoint;
     [SerializeField] private float chargeShotTime;
     [SerializeField] private float waitAfterShotTime;
 
@@ -33,6 +36,7 @@ public class FeeverEnemy : MonoBehaviour
             rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, 0);
             if (rb.position.x >= pointB.x)
             {
+                Turn();
                 isMovingRight = false;
             }
         }
@@ -42,6 +46,7 @@ public class FeeverEnemy : MonoBehaviour
             rb.linearVelocity = new Vector3(-speed, rb.linearVelocity.y, 0);
             if (rb.position.x <= pointA.x)
             {
+                Turn();
                 isMovingRight = true;
             }
         }
@@ -59,6 +64,8 @@ public class FeeverEnemy : MonoBehaviour
     }
     IEnumerator ClownStartAttacking()
     {
+        playerTransform = GameManager.Instance.player.transform;
+
         Debug.Log("Enemy started attacking!");
         //il nemico si ferma e carica l'attacco verso il giocatore
         rb.linearVelocity = Vector3.zero;
@@ -66,9 +73,17 @@ public class FeeverEnemy : MonoBehaviour
         keepAttacking = isEnemyInSight;
         while (keepAttacking)
         {
-            //fa l'animazione di attacco
+            //carico l'attacco
             yield return new WaitForSeconds(chargeShotTime);
             Debug.Log("Sparo il proiettile verso il player");
+            CheckDirectionToFace(rb.position.x < playerTransform.position.x);
+            Vector3 dir = (playerTransform.position - transform.position).normalized;
+            GameObject g = GameManager.Instance.CreateSneezeBullet(spawnBulletPoint);
+            //Debug.Log("oggetoooo" + g);
+            Bullet b = g.GetComponent<Bullet>();
+            //Debug.Log("bullettooooo" + b);
+            b.ShootInDirection(dir);
+            //mi ruoto verso il player e gli sparo
             yield return new WaitForSeconds(waitAfterShotTime);
 
             yield return null;
@@ -78,6 +93,19 @@ public class FeeverEnemy : MonoBehaviour
         Debug.Log("Enemy started Walking!");
 
         yield return null;
+    }
+    public void CheckDirectionToFace(bool isMovingRight)
+    {
+        if (isMovingRight != IsFacingRight)
+            Turn();
+    }
+    public void Turn()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 180;
+        transform.eulerAngles = rotation;
+
+        IsFacingRight = !IsFacingRight;
     }
     private void OnDrawGizmos()
     {
