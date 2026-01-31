@@ -376,6 +376,16 @@ public class Player : MonoBehaviour
     #region JUMP METHODS
     private void Jump()
     {
+        int rand = Random.Range(0, 2);
+        if (rand == 0)
+        {
+            AudioManager.Instance.PlaySFX("C_Jump1");
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("C_Jump2");
+        }
+
         rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
 
         IsJumping = true;
@@ -407,6 +417,15 @@ public class Player : MonoBehaviour
         UpdateAnimIsDashing();
         DashCooldown = true;
         float time = 0;
+        int rand = Random.Range(0, 2);
+        if(rand == 0)
+        {
+            AudioManager.Instance.PlaySFX("C_Cat_Dash1");
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("C_Cat_Dash2");
+        }
         while (time <= dashDuration)
         {
             time += Time.deltaTime;
@@ -526,6 +545,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(clawAttackAfterTime);
         Debug.Log("Bear Claw Attack");
+        AudioManager.Instance.PlaySFX("C_Bear_Claw");
         //faccio un overlap sphere per vedere se colpisco qualcosa
         Collider[] hitColliders = Physics.OverlapSphere(clawAttackPoint.position, clawAttackRadius, _enemyLayer);
         foreach (var hit in hitColliders)
@@ -535,6 +555,7 @@ public class Player : MonoBehaviour
             if (damageable != null)
             {
                 damageable.TakeDamage(clawDamage);
+                AudioManager.Instance.PlaySFX("C_Bear_ClawHit");
             }
         }
         yield return new WaitForSeconds(clawAttackCooldown);
