@@ -12,6 +12,7 @@ public class SpiderEnemy : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private bool isMovingRight;
     [SerializeField] private float jumpCooldown = 1f;
+    [SerializeField] private bool endlessJump;
 
 
     [SerializeField] private bool isPlayerInSight;
@@ -28,46 +29,51 @@ public class SpiderEnemy : MonoBehaviour
     private void PlayerEnterRange()
     {
         Debug.Log("ho visto il nemico");
+        isPlayerInSight = true;
     }
     private void PlayerExitRange()
     {
         Debug.Log("non vedo più il nemico");
+        isPlayerInSight = false;
     }
 
     IEnumerator Jump()
     {
-        yield return new WaitForSeconds(jumpCooldown);
         //salto di continuo
 
-        rb.isKinematic = false;
-
-        if (!isPlayerInSight)
+        while (endlessJump)
         {
-            if (isMovingRight)
+            rb.isKinematic = false;
+
+            if (!isPlayerInSight)
             {
-                rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                if (isMovingRight)
+                {
+                    rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(new Vector3(-jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                }
+                isMovingRight = !isMovingRight;
             }
             else
             {
-                rb.AddForce(new Vector3(-jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                //salto verso la direzione del player
+                if (rb.position.x < playerTransform.position.x)
+                {
+                    //muovi a destra
+                    rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                }
+                else
+                {
+                    //muovi a sinistra
+                    rb.AddForce(new Vector3(-jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+                }
             }
-        }
-        else
-        {
-            //salto verso la direzione del player
-            if (rb.position.x < playerTransform.position.x)
-            {
-                //muovi a destra
-                rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
-            }
-            else
-            {
-                //muovi a sinistra
-                rb.AddForce(new Vector3(-jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
-            }
-        }
 
-        yield return new WaitForSeconds(jumpCooldown);
+            yield return new WaitForSeconds(jumpCooldown);
+        }
     }
     private void OnCollisionEnter(Collision col)
     {

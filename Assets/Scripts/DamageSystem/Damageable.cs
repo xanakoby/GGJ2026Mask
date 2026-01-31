@@ -33,7 +33,16 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter(Collision col)
+    {
+        if (isPlayer)
+        {
+            return;
+            //viene gestito dallo script del player per differenziare se rimbalzare o no
+        }
+        DamageOnCollisionEnter(col);
+    }
+    public void DamageOnCollisionEnter(Collision col)
     {
         Damager dam = col.gameObject.GetComponent<Damager>();
         if (dam == null)
@@ -49,12 +58,21 @@ public class Damageable : MonoBehaviour
 
         if (!canTakeDamage)
             return;
-        //mando il messaggio del danno
-        //CalculateDamagerValue(dam);
-        //Publisher.Publish(new UpdatePlayerHealthMessage(dam));
+
+        CalculateDamagerValue(dam);
+
+        Debug.Log("Dannooooo");
     }
 
-    private void OnCollisionExit2D(Collision2D col)
+    private void OnCollisionExit(Collision col)
+    {
+        if (isPlayer)
+        {
+            return;
+        }
+        DamageOnCollisionExit(col);
+    }
+    public void DamageOnCollisionExit(Collision col)
     {
         Damager dam = col.gameObject.GetComponent<Damager>();
 

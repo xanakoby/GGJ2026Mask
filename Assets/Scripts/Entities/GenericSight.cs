@@ -9,14 +9,14 @@ public class GenericSight : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.layer == layerMask)
+        if (((1 << col.gameObject.layer) & layerMask) != 0)
         {
             enteredSight?.Invoke();
         }
     }
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.layer == layerMask)
+        if (((1 << col.gameObject.layer) & layerMask) != 0)
         {
             exitedSight?.Invoke();
         }

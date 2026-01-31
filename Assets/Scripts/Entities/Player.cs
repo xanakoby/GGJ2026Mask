@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     [SerializeField] float switchTime = 0.2f;
 
     [Space]
-    public LayerMask enemyMask;
-
     [Header("Bear Claw Attack Vars")]
     public Transform clawAttackPoint;
     public float clawAttackRadius;
@@ -36,6 +34,7 @@ public class Player : MonoBehaviour
 
     [Header("Refs")]
     public Rigidbody rb;
+    public Damageable damageable;
 
     [Header("Movement Vars")]
     public Vector2 _moveInput;
@@ -45,6 +44,10 @@ public class Player : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
 
+    [Header("Bounce")]
+    public float bounceOnEnemyForce = 2f;
+    public int bounceDamage = 1;
+
     [Header("Dash Vars")]
     public float dashForce;
     public float dashDuration = 0.5f;
@@ -53,6 +56,7 @@ public class Player : MonoBehaviour
 
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _enemyLayer;
 
     [Header("Checks")]
     [SerializeField] private Transform _groundCheckPoint;
@@ -266,10 +270,40 @@ public class Player : MonoBehaviour
     #region CHECK METHODS
     private void OnCollisionEnter(Collision col)
     {
-        if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize, transform.rotation, _groundLayer))
+        Debug.Log("ho toccato " + col.gameObject.name);
+        if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize/2, transform.rotation, _groundLayer))
         {
             IsJumping = false;
             IsGrounded = true;
+        }
+        //ho toccato un nemico
+        if (((1 << col.gameObject.layer) & _enemyLayer) != 0)
+        {
+            Debug.Log("ho toccato un nemico");
+            if (Physics.CheckBox(_groundCheckPoint.position, _groundCheckSize / 2, transform.rotation, _enemyLayer))
+            {
+                //sono saltato su di un nemico, allora rimbalzo e gli faccio danno
+                rb.AddForce(new Vector3(0, bounceOnEnemyForce, 0), ForceMode.Impulse);
+                Damageable dam = col.gameObject.GetComponent<Damageable>();
+                if(dam != null)
+                {
+                    dam.TakeDamage(bounceDamage);
+                }
+                Debug.Log("gli faccio danno e rimbalzo");
+            }
+            else
+            {
+                //altrimenti prendo danno dal nemico
+                damageable.DamageOnCollisionEnter(col);
+                Debug.Log("mi fa danno");
+            }
+        }
+    }
+    private void OnCollisionExit(Collision col)
+    {
+        if (((1 << col.gameObject.layer) & _enemyLayer) != 0)
+        {
+            damageable.DamageOnCollisionExit(col);
         }
     }
     public void CheckDirectionToFace(bool isMovingRight)
@@ -459,7 +493,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(clawAttackAfterTime);
         Debug.Log("Bear Claw Attack");
         //faccio un overlap sphere per vedere se colpisco qualcosa
-        Collider[] hitColliders = Physics.OverlapSphere(clawAttackPoint.position, clawAttackRadius, enemyMask);
+        Collider[] hitColliders = Physics.OverlapSphere(clawAttackPoint.position, clawAttackRadius, _enemyLayer);
         foreach (var hit in hitColliders)
         {
             Debug.Log("Hit: " + hit.name);
