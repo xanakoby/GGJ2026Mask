@@ -14,4 +14,22 @@ public class Various : MonoBehaviour
     {
         AudioManager.instance.PlaySFX(soundName);
     }
+    #region SPAWN ENEMY 
+    public void CreateClownEnemy(Transform transform)
+    {
+        GameManager.Instance.CreateClownEnemy(transform);
+    }
+    public void CreateBedMonsterEnemy(Transform transform)
+    {
+        GameManager.Instance.CreateBedMonsterEnemy(transform);
+    }
+    public void CreateFeeverEnemy(Transform transform)
+    {
+        GameManager.Instance.CreateFeeverEnemy(transform);
+    }
+    public void CreateSpiderEnemy(Transform transform)
+    {
+        GameManager.Instance.CreateSpiderEnemy(transform);
+    }
+    #endregion
 }
