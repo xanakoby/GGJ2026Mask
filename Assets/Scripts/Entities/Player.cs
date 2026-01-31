@@ -449,6 +449,8 @@ public class Player : MonoBehaviour
                 IsCatMask = true;
                 IsBearMask = false;
                 IsFrogMask = false;
+
+                UIManager.Instance.UpdateButtonToPress(0);
                 break;
             case "Bear":
                 currentMask = EMaskType.Bear;
@@ -456,6 +458,7 @@ public class Player : MonoBehaviour
                 IsCatMask = false;
                 IsBearMask = true;
                 IsFrogMask = false;
+                UIManager.Instance.UpdateButtonToPress(1);
                 break;
             case "Frog":
                 currentMask = EMaskType.Frog;
@@ -463,6 +466,7 @@ public class Player : MonoBehaviour
                 IsCatMask = false;
                 IsBearMask = false;
                 IsFrogMask = true;
+                UIManager.Instance.UpdateButtonToPress(2);
                 break;
             default:
                 currentMask = EMaskType.None;

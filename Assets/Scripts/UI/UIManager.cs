@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Mask Vars")]
     [SerializeField] private HorizontalLayoutGroup maskSelectionLayout;
     [SerializeField] private Image[] maskImages;
+    [SerializeField] private Image[] buttonToPress;
     [SerializeField] float switchTime = 0.2f;
     bool isSwitchingMask;
     bool switchedLeftRight;
@@ -46,6 +47,10 @@ public class UIManager : Singleton<UIManager>
         //{
         //    analogDirection = Vector2.zero;
         //};
+        
+    }
+    private void Start()
+    {
         playerInput = GameManager.Instance.playerInput;
 
         playerInput.OnSwitchLMask += SwitchToLeftMask;
@@ -164,6 +169,14 @@ public class UIManager : Singleton<UIManager>
         LayoutRebuilder.MarkLayoutForRebuild(maskSelectionLayout.transform as RectTransform);
 
         isSwitchingMask = false;
+    }
+    public void UpdateButtonToPress(int indexMask)
+    {
+        foreach (Image img in buttonToPress)
+        {
+            img.gameObject.SetActive(false);
+        }
+        buttonToPress[indexMask].gameObject.SetActive(true);
     }
     #endregion
     #region HEALTH METHODS
