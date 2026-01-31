@@ -20,6 +20,6 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnStartButtonClicked()
     {
-        // Start the game
+        GameManager.Instance.ChangeScene("Tutorial");
     }
 }
