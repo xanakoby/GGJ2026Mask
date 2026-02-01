@@ -22,6 +22,9 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         enemyFactory = new Factory();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void FreezePlayer(bool _toFreeze)
     {
