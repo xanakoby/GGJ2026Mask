@@ -48,10 +48,10 @@ public class AudioManager : Singleton<AudioManager>
         {
             //fa fade in fade out tra musica
 
-            //musicSource.clip = s.clip;
-            //musicSource.Play();
+            musicSource.clip = s.clip;
+            musicSource.Play();
 
-            StartCoroutine(FadeInOutMusic(s));
+            //StartCoroutine(FadeInOutMusic(s));
         }
     }
     IEnumerator FadeInOutMusic(Sound s)
