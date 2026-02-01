@@ -160,7 +160,9 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!IsDashing)
+        if (IsDashing || (IsFrogMask && IsAttacking))
+            return;
+
             Move();
     }
     private void OnEnable()
@@ -213,6 +215,7 @@ public class Player : MonoBehaviour
 
         playerInput.OnBearClawAttackAction += BearClawAttack; ;
         playerInput.OnFrogTongueAttackAction += FrogTongueAttack;
+        tongue.OnColEnter += InterruptTongueAnim;
 
         //playerInput.OnHoldSwitchMask += SwitchMaskHold;
         //playerInput.OnUnHoldSwitchMask += SwitchMaskUnHold;
@@ -563,10 +566,9 @@ public class Player : MonoBehaviour
     }
     private void FrogTongueAttack()
     {
-        return;
         //damageable fixare quando avrò i models
         //posso attaccare solo se non sto già attaccando
-        if (IsAttacking || IsDashing || !IsSwitchingMask)
+        if (IsAttacking || !IsFrogMask || IsDashing || !IsSwitchingMask)
             return;
 
         tongueCoroutine = StartCoroutine(TongueAttackCoroutine());
@@ -580,9 +582,20 @@ public class Player : MonoBehaviour
         frogMaskAnimator.SetTrigger("AttackTrigger");
 
         //mi prendo la durata dell'animazione di tongue attack
-        float tongueAttackDuration = tongueAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(tongueAttackDuration / 2); //aspetto metà animazione per attivare la lingua
+        //float tongueAttackDuration = tongueAnimator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(0.7f); //aspetto metà animazione per attivare la lingua
         //ha raggiunto la fine dell'estensione, quindi torno a casa
+
+        AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
+        //float interruptedAnimTime = info.normalizedTime % 1f;
+
+        tongueAnimator.SetFloat("StopFrame", 0.7f);
+        tongueAnimator.SetTrigger("HitTrigger");
+
+        frogMaskAnimator.SetFloat("StopFrame", 0.7f);
+        frogMaskAnimator.SetTrigger("HitTrigger");
+
+        yield return new WaitForSeconds(0.7f);
 
         tongue.gameObject.SetActive(false);
 
@@ -610,6 +623,14 @@ public class Player : MonoBehaviour
         tongue.gameObject.SetActive(false);
         //passo il parametro del frame in cui interrompo l'animazione
 
+        if (IsFacingRight)
+        {
+            graphicsTransform.eulerAngles = new Vector3(graphicsTransform.eulerAngles.x, -140f, graphicsTransform.eulerAngles.z);
+        }
+        else
+        {
+            graphicsTransform.eulerAngles = new Vector3(graphicsTransform.eulerAngles.x, 40f, graphicsTransform.eulerAngles.z);
+        }
     }
     #endregion
     #region ANIMATOR UPDATES
