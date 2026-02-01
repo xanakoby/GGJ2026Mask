@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   itemSetupper: {fileID: 8349199173240399390}
-  speed: 100
+  speed: 6
   lifeDuration: 3
   rb: {fileID: 2797183245731967545}
 --- !u!114 &1060073845187989150
