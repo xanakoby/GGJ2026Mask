@@ -666,7 +666,7 @@ public class Player : MonoBehaviour
     }
     private void UpdateAnimSwitchMask()
     {
-        characterAnimator.SetTrigger("SwitchMask");
+        characterAnimator.SetTrigger("SwitchTrigger");
     }
     #endregion   
     private void OnDrawGizmos()
