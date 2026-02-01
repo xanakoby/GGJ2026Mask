@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 
     public void ShootInDirection(Vector2 shootDir)
     {
-        rb.linearVelocity = shootDir.normalized;
+        rb.linearVelocity = shootDir.normalized * speed;
 
         float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
