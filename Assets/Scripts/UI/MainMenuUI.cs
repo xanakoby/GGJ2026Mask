@@ -21,5 +21,6 @@ public class MainMenuUI : MonoBehaviour
     private void OnStartButtonClicked()
     {
         GameManager.Instance.ChangeScene("Tutorial");
+        AudioManager.Instance.PlayMusic("Harp");
     }
 }

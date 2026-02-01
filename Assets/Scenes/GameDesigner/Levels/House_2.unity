@@ -7285,6 +7285,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
+      propertyPath: triggerOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -7306,7 +7310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5238989194504421019, guid: 83dd94389e0fbaf4f8ae397241e73b9e, type: 3}
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: nomeDellaProssimaScena
+      value: Ending
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
