@@ -349,14 +349,14 @@ MonoBehaviour:
   maskNoneMovement: {fileID: 11400000, guid: 63f5dbe39786417488b23196179b03ac, type: 2}
   switchTime: 0.2
   clawAttackPoint: {fileID: 8484694590706384714}
-  clawAttackRadius: 0.5
+  clawAttackRadius: 1
   clawAttackAfterTime: 0.2
   clawAttackCooldown: 0.3
   clawDamage: 1
   tongueAnimator: {fileID: 7449365122932311393}
   frogMaskAnimator: {fileID: 1037725620985787008}
   tongue: {fileID: 3567232198785195803}
-  tongueAttackCooldown: 2.5
+  tongueAttackCooldown: 2
   rb: {fileID: 2076462855623690269}
   damageable: {fileID: 1852352455208053182}
   graphicsTransform: {fileID: 7531399659695282022}
@@ -367,7 +367,7 @@ MonoBehaviour:
   gravitiAdded: 0
   jumpForce: 0
   jumpCooldown: 0
-  bounceOnEnemyForce: 8
+  bounceOnEnemyForce: 11
   bounceDamage: 1
   dashForce: 15
   dashDuration: 0.15
@@ -568,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 8258556239712574183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

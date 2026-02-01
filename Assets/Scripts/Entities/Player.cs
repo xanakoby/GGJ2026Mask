@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     public float dashDuration = 0.5f;
     [Tooltip("Il cooldown non può durare meno della dashDuration")]
     public float dashCooldown = 1f;
+    private float currentDashCooldown;
 
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
@@ -307,6 +308,11 @@ public class Player : MonoBehaviour
                     dam.TakeDamage(bounceDamage);
                 }
                 Debug.Log("gli faccio danno e rimbalzo");
+                if (DashCooldown == true)
+                {
+                    currentDashCooldown = dashCooldown;
+                    DashCooldown = false;
+                }
             }
             else
             {
@@ -419,7 +425,7 @@ public class Player : MonoBehaviour
         IsDashing = true;
         UpdateAnimIsDashing();
         DashCooldown = true;
-        float time = 0;
+        currentDashCooldown = 0;
         int rand = Random.Range(0, 2);
         if(rand == 0)
         {
@@ -429,9 +435,9 @@ public class Player : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX("C_Cat_Dash2");
         }
-        while (time <= dashDuration)
+        while (currentDashCooldown <= dashDuration)
         {
-            time += Time.deltaTime;
+            currentDashCooldown += Time.deltaTime;
             rb.linearVelocity = new Vector3(lastDir.normalized.x * dashForce, 0, 0);
             yield return null;
         }
@@ -494,6 +500,7 @@ public class Player : MonoBehaviour
                 currentMask = EMaskType.None;
                 break;
         }
+        UpdateAnimSwitchMask();
         StartCoroutine(MaskSwitchCooldown());
     }
     IEnumerator MaskSwitchCooldown()
@@ -656,6 +663,10 @@ public class Player : MonoBehaviour
     private void UpdateAnimClawTrigger()
     {
         characterAnimator.SetTrigger("ClawTrigger");
+    }
+    private void UpdateAnimSwitchMask()
+    {
+        characterAnimator.SetTrigger("SwitchTrigger");
     }
     #endregion   
     private void OnDrawGizmos()

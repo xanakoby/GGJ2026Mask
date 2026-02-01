@@ -8,6 +8,7 @@ public enum SpawnWave
     Wave1,
     Wave2,
     Wave3,
+    Wave4,
     ImFreee
 }
 [Serializable]
@@ -25,6 +26,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] EnemySpawn[] firstWaveEnemies;
     [SerializeField] EnemySpawn[] secondWaveEnemies;
     [SerializeField] EnemySpawn[] thirdWaveEnemies;
+    [SerializeField] EnemySpawn[] forthWaveEnemies;
     [SerializeField] int currentEnemies = 0;
 
     [SerializeField] UnityEvent onAllWavesCompleted;
@@ -73,6 +75,20 @@ public class Spawner : MonoBehaviour
                 wave = SpawnWave.Wave3;
                 break;
             case SpawnWave.Wave3:
+                //Start Wave 3 spawning logic
+                foreach (EnemySpawn enemySpawn in thirdWaveEnemies)
+                {
+                    //spawno tutti dal primo punto per ora, altrimenti random?
+                    GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
+                    Damageable damageable = g.GetComponent<Damageable>();
+                    damageable.onDeath.AddListener(EnemyDead);
+                    //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
+                    //e va alla prossima wave
+                    currentEnemies++;
+                }
+                wave = SpawnWave.Wave4;
+                break;
+            case SpawnWave.Wave4:
                 //Start Wave 3 spawning logic
                 foreach (EnemySpawn enemySpawn in thirdWaveEnemies)
                 {
