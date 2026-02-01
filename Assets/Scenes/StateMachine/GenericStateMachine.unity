@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -151,7 +151,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e914e8ce53e41440824676b72d10c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputPressed: 0
+  playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
+  currentMask: 0
+  MaskMovement: []
+  currentMaskIndex: 0
+  maskNoneMovement: {fileID: 0}
+  switchTime: 0.2
+  clawAttackPoint: {fileID: 0}
+  clawAttackRadius: 0
+  clawAttackAfterTime: 0
+  clawAttackCooldown: 0
+  clawDamage: 0
+  tongueAnimator: {fileID: 0}
+  frogMaskAnimator: {fileID: 0}
+  tongue: {fileID: 0}
+  tongueAttackCooldown: 0
+  rb: {fileID: 0}
+  damageable: {fileID: 0}
+  graphicsTransform: {fileID: 0}
+  prospettiveRotationDif: 50
+  _moveInput: {x: 0, y: 0}
+  lastDir: {x: 0, y: 0}
+  speed: 0
+  gravitiAdded: 0
+  jumpForce: 0
+  jumpCooldown: 0
+  bounceOnEnemyForce: 2
+  bounceDamage: 1
+  dashForce: 0
+  dashDuration: 0.5
+  dashCooldown: 1
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheckPoint: {fileID: 0}
+  _groundCheckSize: {x: 1, y: 0.5, z: 1}
+  IsFacingRight: 0
+  IsJumping: 0
+  IsMoving: 0
+  IsWalking: 0
+  IsGrounded: 0
+  IsFalling: 0
+  IsDashing: 0
+  DashCooldown: 0
+  IsAttacking: 0
+  SwitchMaskCoolDown: 0.2
+  IsSwitchingMask: 1
+  IsCatMask: 0
+  IsBearMask: 0
+  IsFrogMask: 0
+  debug: 0
 --- !u!65 &73702279
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -192,10 +245,13 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,6 +269,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -480,7 +537,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -723,8 +781,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &2043306876
 Transform:
   m_ObjectHideFlags: 0

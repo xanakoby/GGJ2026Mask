@@ -1427,7 +1427,7 @@ SpriteMask:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1698,7 +1698,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3434,17 +3435,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c00c5f90caabd44fa428fe137d9a07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FeeverEnemy
+  animatorController: {fileID: 0}
   rb: {fileID: 1140403996011936427}
-  pointA: {x: -9, y: 1}
-  pointB: {x: -7, y: 1}
+  leftDistance: -2
+  rightDistance: 2
   speed: 2
   sight: {fileID: 5249739295020246948}
   isMovingRight: 0
+  playerTransform: {fileID: 0}
+  pointA: {x: -9, y: 1}
+  pointB: {x: -7, y: 1}
   isEnemyInSight: 0
   IsFacingRight: 0
   spawnBulletPoint: {fileID: 1276755770}
   chargeShotTime: 0.5
   waitAfterShotTime: 1
+  graphicsTransform: {fileID: 0}
+  prospettiveRotationDif: 50
 --- !u!135 &8370969118538212513
 SphereCollider:
   m_ObjectHideFlags: 0
