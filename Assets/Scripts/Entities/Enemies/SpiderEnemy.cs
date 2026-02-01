@@ -22,6 +22,8 @@ public class SpiderEnemy : MonoBehaviour
     [SerializeField] private bool isPlayerInSight;
     public bool IsFacingRight;
     [SerializeField] private bool checkCollision;
+
+    Coroutine attackCoroutine;
     private void Start()
     {
         sight.enteredSight += PlayerEnterRange;
@@ -31,11 +33,15 @@ public class SpiderEnemy : MonoBehaviour
     }
     private void OnEnable()
     {
-        StartCoroutine(Jump());
+        attackCoroutine = StartCoroutine(Jump());
     }
     private void OnDisable()
     {
-        StopCoroutine(Jump());
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(Jump());
+            attackCoroutine = null;
+        }
     }
     private void PlayerEnterRange()
     {

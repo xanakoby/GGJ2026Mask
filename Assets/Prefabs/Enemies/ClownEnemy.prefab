@@ -159,14 +159,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClownEnemy
   rb: {fileID: 2507695588425038446}
+  jumpForceVertical: 4
+  jumpForceHorizontal: 2
+  jumpCooldown: 1
+  endlessJump: 1
   leftDistance: -2
   rightDistance: 2
   speed: 0.9
   sight: {fileID: 3214867800864636032}
+  playerTransform: {fileID: 0}
   isMovingRight: 0
   pointA: {x: -9, y: 1}
   pointB: {x: -4, y: 1}
-  isEnemyInSight: 0
+  isPlayerInSight: 0
   IsFacingRight: 0
   attackAnimation: 3
   graphicsTransform: {fileID: 4616437447427551751}
@@ -312,7 +317,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
+  m_Radius: 0.24
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3214867800864636032
 MonoBehaviour:

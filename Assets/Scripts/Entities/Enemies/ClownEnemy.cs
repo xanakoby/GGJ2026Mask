@@ -5,18 +5,25 @@ using UnityEngine;
 public class ClownEnemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
+
+    [SerializeField] private float jumpForceVertical = 2f;
+    [SerializeField] private float jumpForceHorizontal = 2f;
+    [SerializeField] private float jumpCooldown = 1f;
+    [SerializeField] private bool endlessJump;
+
     [Tooltip("distanza a sinistra rispetto al clown")]
     [SerializeField] private float leftDistance = -2;
     [Tooltip("distanza a sinistra rispetto al clown")]
     [SerializeField] private float rightDistance = 2;
     [SerializeField] private float speed = 2f;
     [SerializeField] private GenericSight sight;
+    [SerializeField] private Transform playerTransform;
     [SerializeField] bool isMovingRight;
 
     [SerializeField] private Vector2 pointA;
     [SerializeField] private Vector2 pointB;
 
-    [SerializeField] private bool isEnemyInSight;
+    [SerializeField] private bool isPlayerInSight;
     public bool IsFacingRight;
     bool keepAttacking;
     bool elapsedFirstFrame;
@@ -32,6 +39,8 @@ public class ClownEnemy : MonoBehaviour
     {
         sight.enteredSight += PlayerEnterRange;
         sight.exitedSight += PlayerExitRange;
+
+        playerTransform = GameManager.Instance.player.transform;
     }
     //da fare il punto point a b da dove spawno per tutti gli altri
     //private void OnEnable()
@@ -39,11 +48,15 @@ public class ClownEnemy : MonoBehaviour
     //    pointA = new Vector2(transform.position.x + leftDistance, 0);
     //    pointB = new Vector2(transform.position.x + rightDistance, 0);
     //}
+    private void OnEnable()
+    {
+        attackCoroutine = StartCoroutine(StartPattern());
+    }
     private void OnDisable()
     {
         if (attackCoroutine != null)
         {
-            StopCoroutine(ClownStartAttacking());
+            StopCoroutine(StartPattern());
             attackCoroutine = null;
         }
         elapsedFirstFrame = false;
@@ -57,8 +70,8 @@ public class ClownEnemy : MonoBehaviour
             pointB = new Vector2(transform.position.x + rightDistance, 0);
             elapsedFirstFrame = true;
         }
-        if(!keepAttacking)
-        MoveThroughPatterns();
+        //if(!keepAttacking)
+        //MoveThroughPatterns();
     }
     private void MoveThroughPatterns()
     {
@@ -86,14 +99,13 @@ public class ClownEnemy : MonoBehaviour
 
     private void PlayerEnterRange()
     {
-        isEnemyInSight = true;
-        if (keepAttacking)
-            return;
-        attackCoroutine = StartCoroutine(ClownStartAttacking());
+        isPlayerInSight = true;
+        //if (keepAttacking)
+        //    return;
     }
     private void PlayerExitRange()
     {
-        isEnemyInSight = false;
+        isPlayerInSight = false;
     }
     IEnumerator ClownStartAttacking()
     {
@@ -101,18 +113,78 @@ public class ClownEnemy : MonoBehaviour
         //il nemico si ferma e carica l'attacco verso il giocatore
         rb.linearVelocity = Vector3.zero;
 
-        keepAttacking = isEnemyInSight;
+        keepAttacking = isPlayerInSight;
         while (keepAttacking)
         {
             //fa l'animazione di attacco
             yield return new WaitForSeconds(attackAnimation);
             yield return null;
             Debug.Log("Clown Attaccoooooo");
-            keepAttacking = isEnemyInSight;
+            keepAttacking = isPlayerInSight;
         }
         Debug.Log("Enemy started Walking!");
 
         yield return null;
+    }
+    IEnumerator StartPattern()
+    {
+        while (endlessJump)
+        {
+            rb.isKinematic = false;
+
+            if (!isPlayerInSight)
+            {
+
+                if (isMovingRight)
+                {
+                    rb.AddForce(new Vector3(jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+
+                    if (rb.position.x >= pointB.x)
+                    {
+                        Turn();
+                        isMovingRight = false;
+                    }
+                }
+                else
+                {
+                    rb.AddForce(new Vector3(-jumpForceHorizontal, jumpForceVertical, 0), ForceMode.Impulse);
+
+                    if (rb.position.x <= pointA.x)
+                    {
+                        Turn();
+                        isMovingRight = true;
+                    }
+                }
+                //isMovingRight = !isMovingRight;
+            }
+            else
+            {
+                Debug.Log("Enemy started attacking!");
+                CheckDirectionToFace(rb.position.x < playerTransform.position.x);
+                //il nemico si ferma e carica l'attacco verso il giocatore
+                rb.linearVelocity = Vector3.zero;
+
+                keepAttacking = isPlayerInSight;
+                while (keepAttacking)
+                {
+                    //fa l'animazione di attacco
+                    yield return new WaitForSeconds(attackAnimation);
+                    yield return null;
+                    Debug.Log("Clown Attaccoooooo");
+                    keepAttacking = isPlayerInSight;
+                }
+                Debug.Log("Enemy started Walking!");
+
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(jumpCooldown);
+        }
+    }
+    public void CheckDirectionToFace(bool isMovingRight)
+    {
+        if (isMovingRight != IsFacingRight)
+            Turn();
     }
     public void Turn()
     {

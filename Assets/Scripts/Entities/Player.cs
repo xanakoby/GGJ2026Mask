@@ -28,9 +28,9 @@ public class Player : MonoBehaviour
     public Animator frogMaskAnimator;
     Coroutine tongueCoroutine;
 
-    public Tongue tongue;
+    public Transform tongue;
     public float tongueAttackCooldown;
-    public int tongueDamage;
+    //public int tongueDamage;
 
     [Header("Refs")]
     public Rigidbody rb;
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (IsDashing || (IsFrogMask && IsAttacking))
+        if (IsDashing)
             return;
 
             Move();
@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
 
         playerInput.OnBearClawAttackAction += BearClawAttack; ;
         playerInput.OnFrogTongueAttackAction += FrogTongueAttack;
-        tongue.OnColEnter += InterruptTongueAnim;
+        //tongue.OnColEnter += InterruptTongueAnim;
 
         //playerInput.OnHoldSwitchMask += SwitchMaskHold;
         //playerInput.OnUnHoldSwitchMask += SwitchMaskUnHold;
@@ -576,7 +576,21 @@ public class Player : MonoBehaviour
     IEnumerator TongueAttackCoroutine()
     {
         IsAttacking = true;
-        tongue.gameObject.SetActive(true);
+
+        //tongue.gameObject.SetActive(true);
+        if (IsFacingRight)
+        {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y = 90;
+            tongue.eulerAngles = rotation;
+        }
+        else
+        {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y = 270;
+            tongue.eulerAngles = rotation;
+        }
+
         //a seconda della dir faccio determinata animazione
         tongueAnimator.SetTrigger("AttackTrigger");
         frogMaskAnimator.SetTrigger("AttackTrigger");
@@ -586,52 +600,41 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.7f); //aspetto metà animazione per attivare la lingua
         //ha raggiunto la fine dell'estensione, quindi torno a casa
 
-        AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
+        //AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
         //float interruptedAnimTime = info.normalizedTime % 1f;
 
-        tongueAnimator.SetFloat("StopFrame", 0.7f);
+        //tongueAnimator.SetFloat("StopFrame", 0.7f);
         tongueAnimator.SetTrigger("HitTrigger");
 
-        frogMaskAnimator.SetFloat("StopFrame", 0.7f);
+        //frogMaskAnimator.SetFloat("StopFrame", 0.7f);
         frogMaskAnimator.SetTrigger("HitTrigger");
 
-        yield return new WaitForSeconds(0.7f);
-
-        tongue.gameObject.SetActive(false);
+        //tongue.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(tongueAttackCooldown);
 
         IsAttacking = false;
     }
-    public void InterruptTongueAnim()
-    {
-        if (tongueCoroutine != null)
-        {
-            StopCoroutine(tongueCoroutine);
-            tongueCoroutine = null;
-        }
+    //public void InterruptTongueAnim()
+    //{
+    //    if (tongueCoroutine != null)
+    //    {
+    //        StopCoroutine(tongueCoroutine);
+    //        tongueCoroutine = null;
+    //    }
 
-        AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
-        float interruptedAnimTime = info.normalizedTime % 1f;
+    //    AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
+    //    float interruptedAnimTime = info.normalizedTime % 1f;
 
-        tongueAnimator.SetFloat("StopFrame", interruptedAnimTime);
-        tongueAnimator.SetTrigger("HitTrigger");
+    //    tongueAnimator.SetFloat("StopFrame", interruptedAnimTime);
+    //    tongueAnimator.SetTrigger("HitTrigger");
 
-        frogMaskAnimator.SetFloat("StopFrame", interruptedAnimTime);
-        frogMaskAnimator.SetTrigger("HitTrigger");
+    //    frogMaskAnimator.SetFloat("StopFrame", interruptedAnimTime);
+    //    frogMaskAnimator.SetTrigger("HitTrigger");
 
-        tongue.gameObject.SetActive(false);
-        //passo il parametro del frame in cui interrompo l'animazione
-
-        if (IsFacingRight)
-        {
-            graphicsTransform.eulerAngles = new Vector3(graphicsTransform.eulerAngles.x, -140f, graphicsTransform.eulerAngles.z);
-        }
-        else
-        {
-            graphicsTransform.eulerAngles = new Vector3(graphicsTransform.eulerAngles.x, 40f, graphicsTransform.eulerAngles.z);
-        }
-    }
+    //    tongue.gameObject.SetActive(false);
+    //    //passo il parametro del frame in cui interrompo l'animazione
+    //}
     #endregion
     #region ANIMATOR UPDATES
     private void UpdateAnimSpeed()

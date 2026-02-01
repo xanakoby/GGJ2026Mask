@@ -355,9 +355,8 @@ MonoBehaviour:
   clawDamage: 1
   tongueAnimator: {fileID: 7449365122932311393}
   frogMaskAnimator: {fileID: 1037725620985787008}
-  tongue: {fileID: 6664977440704156240}
+  tongue: {fileID: 3567232198785195803}
   tongueAttackCooldown: 2.5
-  tongueDamage: 1
   rb: {fileID: 2076462855623690269}
   damageable: {fileID: 1852352455208053182}
   graphicsTransform: {fileID: 7531399659695282022}
