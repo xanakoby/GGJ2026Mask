@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpiderEnemy : MonoBehaviour
 {
+    [SerializeField] private Animator animationController;
+
     [SerializeField] LayerMask groundMask;
 
     [SerializeField] private Rigidbody rb;
@@ -39,11 +41,13 @@ public class SpiderEnemy : MonoBehaviour
     {
         Debug.Log("ho visto il nemico");
         isPlayerInSight = true;
+        animationController.SetBool("bIsEngaged", isPlayerInSight);
     }
     private void PlayerExitRange()
     {
         Debug.Log("non vedo più il nemico");
         isPlayerInSight = false;
+        animationController.SetBool("bIsEngaged", isPlayerInSight);
     }
 
     IEnumerator Jump()

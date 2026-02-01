@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class FeeverEnemy : MonoBehaviour
 {
+    [SerializeField] private Animator animatorController;
+
     [SerializeField] private Rigidbody rb;
     [Tooltip("distanza a sinistra rispetto al clown")]
     [SerializeField] private float leftDistance = -2;
@@ -96,9 +98,12 @@ public class FeeverEnemy : MonoBehaviour
         //il nemico si ferma e carica l'attacco verso il giocatore
         rb.linearVelocity = Vector3.zero;
 
+
         keepAttacking = isEnemyInSight;
         while (keepAttacking)
         {
+            animatorController.SetTrigger("AttackTrigger");
+
             //carico l'attacco
             yield return new WaitForSeconds(chargeShotTime);
             Debug.Log("Sparo il proiettile verso il player");
