@@ -15,4 +15,4 @@ MonoBehaviour:
   MovementName: Bear
   Speed: 3.5
   JumpForce: 10
-  GravityAdded: 6
+  GravityAdded: 3

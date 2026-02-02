@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
         }
 
         #region GRAVITY
-        rb.AddForce(Vector3.down * gravitiAdded, ForceMode.Acceleration);
+        //rb.AddForce(Vector3.down * gravitiAdded, ForceMode.Acceleration);
         UpdateAnimVerticalSpeed();
         #endregion
         #region COLLISION CHECKS
@@ -164,7 +164,14 @@ public class Player : MonoBehaviour
         if (IsDashing)
             return;
 
-            Move();
+        //rb.AddForce(Vector3.down * gravitiAdded, ForceMode.Acceleration);
+        //forse questo è meglio
+        if (!IsGrounded)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * gravitiAdded * Time.fixedDeltaTime;
+        }
+
+        Move();
     }
     private void OnEnable()
     {

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementData
   MovementName: Frog
   Speed: 4
-  JumpForce: 13
-  GravityAdded: 5
+  JumpForce: 15
+  GravityAdded: 2

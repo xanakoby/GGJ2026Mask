@@ -15,4 +15,4 @@ MonoBehaviour:
   MovementName: Cat
   Speed: 5
   JumpForce: 11
-  GravityAdded: 5
+  GravityAdded: 2
