@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Damageable : MonoBehaviour
     [SerializeField] int maxHealth = 1;
     public UnityEvent onDamageTaken;
     public UnityEvent onHealthTaken;
+    public Action beforeDeath;
     public UnityEvent onDeath;
 
     [Space]
@@ -110,6 +112,8 @@ public class Damageable : MonoBehaviour
                     {
                         currentHealth = 0;
                         //HealthUIManager.Instance.UpdateHealth(currentHealth);
+                        Debug.Log("BEFORE DEATH INVOKED");
+                        beforeDeath?.Invoke();
                         onDeath?.Invoke();
                         if (isPlayer)
                             UIManager.Instance.UpdateHealthDisplay(currentHealth);
@@ -143,6 +147,8 @@ public class Damageable : MonoBehaviour
                 case EDamageType.instantDeath:
 
                     currentHealth = 0;
+                    Debug.Log("BEFORE DEATH INVOKED");
+                    beforeDeath?.Invoke();
                     onDeath?.Invoke();
 
                     break;
@@ -186,6 +192,7 @@ public class Damageable : MonoBehaviour
 (currentHealth <= 0)
         {
             currentHealth = 0;
+            beforeDeath?.Invoke();
             onDeath?.Invoke();
             return;
         }

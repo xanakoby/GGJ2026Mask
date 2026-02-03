@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
     public bool DashCooldown;
     public bool IsAttacking;
 
+    public bool ClawCooldown;
+    public bool TongueCooldown;
+
     [Space]
     public float SwitchMaskCoolDown = 0.2f;
     public bool IsSwitchingMask = true;
@@ -422,7 +425,7 @@ public class Player : MonoBehaviour
     }
     private bool CanDash()
     {
-        if (IsDashing || !IsCatMask || !IsSwitchingMask || DashCooldown)
+        if (IsDashing || !IsCatMask || IsSwitchingMask || DashCooldown || IsAttacking)
             return false;
         else
             return true;
@@ -512,15 +515,13 @@ public class Player : MonoBehaviour
     }
     IEnumerator MaskSwitchCooldown()
     {
-        IsSwitchingMask = false;
-        yield return new WaitForSeconds(SwitchMaskCoolDown);
         IsSwitchingMask = true;
+        yield return new WaitForSeconds(SwitchMaskCoolDown);
+        IsSwitchingMask = false;
     }
     private void SwitchLeftMask()
     {
-        if (!IsSwitchingMask)
-            return;
-        if (IsAttacking)
+        if (IsSwitchingMask || IsAttacking || IsDashing)
             return;
 
         currentMaskIndex--;
@@ -533,7 +534,7 @@ public class Player : MonoBehaviour
     }
     private void SwitchRightMask()
     {
-        if (!IsSwitchingMask || IsAttacking || IsDashing)
+        if (IsSwitchingMask || IsAttacking || IsDashing)
             return;
 
         currentMaskIndex++;
@@ -550,7 +551,7 @@ public class Player : MonoBehaviour
     private void BearClawAttack()
     {
         //posso attaccare solo se non sto già attaccando
-        if (IsAttacking || !IsBearMask || !IsSwitchingMask)
+        if (IsAttacking || !IsBearMask || IsSwitchingMask || IsDashing || ClawCooldown)
             return;
 
         StartCoroutine(ClawAttackCoroutine());
@@ -560,6 +561,7 @@ public class Player : MonoBehaviour
         IsAttacking = true;
         UpdateAnimClawTrigger();
 
+        ClawCooldown = true;
         yield return new WaitForSeconds(clawAttackAfterTime);
         Debug.Log("Bear Claw Attack");
         AudioManager.Instance.PlaySFX("C_Bear_Claw");
@@ -575,14 +577,15 @@ public class Player : MonoBehaviour
                 AudioManager.Instance.PlaySFX("C_Bear_ClawHit");
             }
         }
-        yield return new WaitForSeconds(clawAttackCooldown);
         IsAttacking = false;
+        yield return new WaitForSeconds(clawAttackCooldown);
+        ClawCooldown = false;
     }
     private void FrogTongueAttack()
     {
         //damageable fixare quando avrò i models
         //posso attaccare solo se non sto già attaccando
-        if (IsAttacking || !IsFrogMask || IsDashing || !IsSwitchingMask)
+        if (IsAttacking || !IsFrogMask || IsDashing || IsSwitchingMask || TongueCooldown)
             return;
 
         tongueCoroutine = StartCoroutine(TongueAttackCoroutine());
@@ -590,44 +593,60 @@ public class Player : MonoBehaviour
     IEnumerator TongueAttackCoroutine()
     {
         IsAttacking = true;
+        TongueCooldown = true;
 
-        //tongue.gameObject.SetActive(true);
+        tongue.gameObject.SetActive(true);
+        Vector3 rotation = transform.eulerAngles;
         if (IsFacingRight)
         {
-            Vector3 rotation = transform.eulerAngles;
+            //rotation = transform.eulerAngles;
             rotation.y = 90;
             tongue.eulerAngles = rotation;
         }
         else
         {
-            Vector3 rotation = transform.eulerAngles;
+            //rotation = transform.eulerAngles;
             rotation.y = 270;
             tongue.eulerAngles = rotation;
         }
 
         //a seconda della dir faccio determinata animazione
-        tongueAnimator.SetTrigger("AttackTrigger");
-        frogMaskAnimator.SetTrigger("AttackTrigger");
+        //tongueAnimator.SetTrigger("AttackTrigger");
+        //frogMaskAnimator.SetTrigger("AttackTrigger");
+        tongueAnimator.Play("Attack");
+        frogMaskAnimator.Play("Attack");
+
+        Debug.Log("Ha attaccato con la lingua");
 
         //mi prendo la durata dell'animazione di tongue attack
         //float tongueAttackDuration = tongueAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(0.7f); //aspetto metà animazione per attivare la lingua
+        //yield return new WaitForSeconds(1.3f); //aspetto metà animazione per attivare la lingua
+        float t = 1.3f;
+        while(t > 0)
+        {
+            tongue.eulerAngles = rotation;
+            t -= Time.deltaTime;
+            yield return null;
+        }
         //ha raggiunto la fine dell'estensione, quindi torno a casa
 
         //AnimatorStateInfo info = tongueAnimator.GetCurrentAnimatorStateInfo(0);
         //float interruptedAnimTime = info.normalizedTime % 1f;
 
         //tongueAnimator.SetFloat("StopFrame", 0.7f);
-        tongueAnimator.SetTrigger("HitTrigger");
+        //tongueAnimator.SetTrigger("HitTrigger");
 
         //frogMaskAnimator.SetFloat("StopFrame", 0.7f);
-        frogMaskAnimator.SetTrigger("HitTrigger");
+        //frogMaskAnimator.SetTrigger("HitTrigger");
 
-        //tongue.gameObject.SetActive(false);
+        tongue.gameObject.SetActive(false);
+
+        IsAttacking = false;
 
         yield return new WaitForSeconds(tongueAttackCooldown);
 
-        IsAttacking = false;
+        TongueCooldown = false;
+
     }
     //public void InterruptTongueAnim()
     //{

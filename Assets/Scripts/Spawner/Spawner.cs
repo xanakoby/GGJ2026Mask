@@ -28,6 +28,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] EnemySpawn[] thirdWaveEnemies;
     [SerializeField] EnemySpawn[] forthWaveEnemies;
     [SerializeField] int currentEnemies = 0;
+    bool isSpawningWave = false;
+    bool allWavesCompleted = false;
 
     [SerializeField] UnityEvent onAllWavesCompleted;
     private void Awake()
@@ -43,6 +45,9 @@ public class Spawner : MonoBehaviour
     }
     public void SpawnCurrentWaveEnemies()
     {
+        if (isSpawningWave) return;
+        isSpawningWave = true;
+
         currentEnemies = 0;
         switch (wave)
         {
@@ -53,7 +58,9 @@ public class Spawner : MonoBehaviour
                     //spawno tutti dal primo punto per ora, altrimenti random?
                     GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
                     Damageable damageable = g.GetComponent<Damageable>();
-                    damageable.onDeath.AddListener(EnemyDead);
+                    //damageable.onDeath.RemoveListener(EnemyDead);
+                    damageable.beforeDeath += EnemyDead;
+                    //damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
@@ -67,7 +74,9 @@ public class Spawner : MonoBehaviour
                     //spawno tutti dal primo punto per ora, altrimenti random?
                     GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
                     Damageable damageable = g.GetComponent<Damageable>();
-                    damageable.onDeath.AddListener(EnemyDead);
+                    //damageable.onDeath.RemoveListener(EnemyDead);
+                    damageable.beforeDeath += EnemyDead;
+                    //damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
@@ -81,7 +90,9 @@ public class Spawner : MonoBehaviour
                     //spawno tutti dal primo punto per ora, altrimenti random?
                     GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
                     Damageable damageable = g.GetComponent<Damageable>();
-                    damageable.onDeath.AddListener(EnemyDead);
+                    //damageable.onDeath.RemoveListener(EnemyDead);
+                    damageable.beforeDeath += EnemyDead;
+                    //damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
@@ -90,12 +101,14 @@ public class Spawner : MonoBehaviour
                 break;
             case SpawnWave.Wave4:
                 //Start Wave 3 spawning logic
-                foreach (EnemySpawn enemySpawn in thirdWaveEnemies)
+                foreach (EnemySpawn enemySpawn in forthWaveEnemies)
                 {
                     //spawno tutti dal primo punto per ora, altrimenti random?
                     GameObject g = SpawnEnemy(enemySpawn.enemyType, spawnPoints[enemySpawn.spawnPointIndex]);
                     Damageable damageable = g.GetComponent<Damageable>();
-                    damageable.onDeath.AddListener(EnemyDead);
+                    //damageable.onDeath.RemoveListener(EnemyDead);
+                    damageable.beforeDeath += EnemyDead;
+                    //damageable.onDeath.AddListener(EnemyDead);
                     //dopo aver spawnato assegno alla morte che toglie 1 a currentEnemies
                     //e va alla prossima wave
                     currentEnemies++;
@@ -104,20 +117,25 @@ public class Spawner : MonoBehaviour
                 break;
 
             case SpawnWave.ImFreee:
+                if (allWavesCompleted) return;
+                allWavesCompleted = true;
                 onAllWavesCompleted?.Invoke();
                 break;
         }
+        isSpawningWave = false;
     }
     /// <summary>
     /// controlla la morte di un nemico, se sono tutti morti spawna la wave successiva
     /// </summary>
     public void EnemyDead()
     {
-               currentEnemies--;
-        if (currentEnemies <= 0)
-        {
-            SpawnCurrentWaveEnemies();
-        }
+        Debug.Log("nemico muertooo");
+        currentEnemies--;
+
+        if (currentEnemies > 0)
+            return;
+
+        SpawnCurrentWaveEnemies();
     }
 
     public GameObject SpawnEnemy(EnemyType enemyType, Transform position)

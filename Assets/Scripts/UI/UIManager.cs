@@ -54,8 +54,8 @@ public class UIManager : Singleton<UIManager>
     {
         playerInput = GameManager.Instance.playerInput;
 
-        playerInput.OnSwitchLMask += SwitchToLeftMask;
-        playerInput.OnSwitchRMask += SwitchToRightMask;
+        //playerInput.OnSwitchLMask += SwitchToLeftMask;
+        //playerInput.OnSwitchRMask += SwitchToRightMask;
     }
     private void OnDisable()
     {
@@ -71,8 +71,8 @@ public class UIManager : Singleton<UIManager>
         //{
         //    analogDirection = Vector2.zero;
         //};
-        playerInput.OnSwitchLMask -= SwitchToLeftMask;
-        playerInput.OnSwitchRMask -= SwitchToRightMask;
+        //playerInput.OnSwitchLMask -= SwitchToLeftMask;
+        //playerInput.OnSwitchRMask -= SwitchToRightMask;
     }
     private void Update()
     {

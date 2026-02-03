@@ -17,6 +17,7 @@ public class EnemySetupper : MonoBehaviour
         {
             itemBase.onDestroyTrigger?.Invoke();
             gameObject.SetActive(false);
+            Debug.Log("wawawawawa");
         });
     }
     private void OnEnable()
@@ -26,5 +27,9 @@ public class EnemySetupper : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
 
         damageable.SetFullHealth();
+    }
+    private void OnDisable()
+    {
+        damageable.beforeDeath = null;
     }
 }

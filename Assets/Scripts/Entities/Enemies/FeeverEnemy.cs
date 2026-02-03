@@ -110,6 +110,7 @@ public class FeeverEnemy : MonoBehaviour
             CheckDirectionToFace(rb.position.x < playerTransform.position.x);
             Vector3 dir = (playerTransform.position - transform.position).normalized;
             GameObject g = GameManager.Instance.CreateSneezeBullet(spawnBulletPoint);
+            g.transform.position = new Vector3(spawnBulletPoint.position.x, spawnBulletPoint.position.y, 0);
             //Debug.Log("oggetoooo" + g);
             Bullet b = g.GetComponent<Bullet>();
             //Debug.Log("bullettooooo" + b);
