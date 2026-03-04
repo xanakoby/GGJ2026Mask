@@ -1,7 +1,6 @@
 using DesignPatterns.Generics;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
